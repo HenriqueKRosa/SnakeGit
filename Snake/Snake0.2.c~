@@ -7,7 +7,7 @@ int main() {
   int pos[5], map;
   
   memset(pos, 0, sizeof(pos));
-  printf("Selecione o mapa:(Apenas 1 no momento)\n");
+  printf("Selecione o mapa:(Apenas 1 no momento)");
   scanf("%d", &map);
   pos[0] = 55;
 

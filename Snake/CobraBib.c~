@@ -26,9 +26,6 @@ int maps(int pos[5]){
           }
 	else if((x == pos[0]) && (map1[x] == '#'))
 		gg = 1;
-	if(k > 0)
-	 if(pos[0] == pos[k])
-		gg = 1;
       }
 
         if(!ch)
