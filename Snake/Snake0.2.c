@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "CobraBib.h"
+#include "include/CobraBib.h"
 #include <string.h>
 
 int main() {
@@ -9,7 +9,7 @@ int main() {
   memset(pos, 0, sizeof(pos));
   printf("Selecione o mapa:(Apenas 1 no momento)\n");
   scanf("%d", &map);
-  pos[0] = 55;
+  pos[0] = 54;
 
   maps(pos);
 

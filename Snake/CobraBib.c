@@ -1,21 +1,25 @@
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
-#include "CobraBib.h"
+#include "include/CobraBib.h"
 #include <stdlib.h>
 
-int maps(int pos[5]){
-  // V é o mapa do jogo em uma string.
-  char map1[] = "###########        ##        ##        ##        ##        ##        ##        ##        ##        ###########";
+int maps(int pos[5]/*int map*/){
   int x = 0, i, k = 0, ch = 0, gg = 0;
+  char maps[111];
+  FILE *mapt;
 
-  while(map1[x] != '\0')
+  mapt = fopen("maps/test", "r");
+  fread(maps, 1, 111, mapt);
+
+
+  while(maps[x] != '\0')
   {
     for(i=0; i <= 9; i++)
     {
       for(k=0; k <= 4; k++)
       {
-        if((x == pos[k]) && (map1[x] != '#'))
+        if((x == pos[k]) && (maps[x] != '#'))
           {
           if (k == 0){
             printf("@");
@@ -24,7 +28,7 @@ int maps(int pos[5]){
             printf("*");
             ch = 1;}
           }
-	else if((x == pos[0]) && (map1[x] == '#'))
+	else if((x == pos[0]) && (maps[x] == '#'))
 		gg = 1;
 	if(k > 0)
 	 if(pos[0] == pos[k])
@@ -32,7 +36,7 @@ int maps(int pos[5]){
       }
 
         if(!ch)
-          printf("%c", map1[x]);
+          printf("%c", maps[x]);
         x++;
         ch = 0;
         if(i == 9)
