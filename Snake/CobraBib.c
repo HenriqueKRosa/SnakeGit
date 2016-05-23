@@ -6,11 +6,11 @@
 
 int maps(int pos[5]/*int map*/){
   int x = 0, i, k = 0, ch = 0, gg = 0;
-  char maps[111];
+  char maps[110];
   FILE *mapt;
 
   mapt = fopen("maps/test", "r");
-  fread(maps, 1, 111, mapt);
+  fread(maps, 1, 110, mapt);
 
 
   while(maps[x] != '\0')

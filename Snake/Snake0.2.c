@@ -14,7 +14,6 @@ int main() {
   maps(pos);
 
   menu(pos);
-  //system("clear");
   printf("GAME OVER\n");
   return 0;
 }
