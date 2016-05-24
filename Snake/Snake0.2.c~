@@ -15,7 +15,7 @@ int main() {
 
   ImprimeMapa(pos);
 
-  menu(pos);
+  Menu(pos);
   printf("GAME OVER\n");
   return 0;
 }

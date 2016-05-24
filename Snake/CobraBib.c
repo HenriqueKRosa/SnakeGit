@@ -4,7 +4,9 @@
 #include "include/CobraBib.h"
 #include <stdlib.h>
 
-void CarregaNivel(int nivelId)
+extern int nivelId;
+
+void CarregaNivel()
 {
 	FILE *mapaArqv;
 
@@ -13,7 +15,6 @@ void CarregaNivel(int nivelId)
 		char nivel[110];
 	 	mapaArqv = fopen("maps/test", "r");
   		fread(nivel, 1, 110, mapaArqv);
-		nivel[110] = nivel[110];
 	}
 
 	else if(nivelId == 1)
@@ -21,21 +22,22 @@ void CarregaNivel(int nivelId)
 		char nivel[209];
 		mapaArqv = fopen("maps/1", "r");
 		fread(nivel, 1, 209, mapaArqv);
-		nivel[209] = nivel[209];
 	}
 }
 
-int ImprimeMapa(int pos[5])
+int ImprimeMapa(int pos[5], char* nivel)
 {
-	int index = 0, isSnake = 0, isGameOver = 0;
+	int index = 0, isSnake = 0, isGameOver = 0, i, x = 0, k, colunas;
 	
+	colunas = GeraNumColunas();
+
 	while(nivel[index] != '\0')
 	{
 		for(i = 0; i <= colunas; i++)
 		{
 			for(k = 0; k <= 4; k++)
 			{
-				if((index == pos[k]) && (mapaArqv[index] != '#'))
+				if((index == pos[k]) && (nivel[index] != '#'))
 				{
 					if (k == 0)
 					{
@@ -49,7 +51,7 @@ int ImprimeMapa(int pos[5])
 						isSnake = 1;
 					}
 				}
-				else if((index == pos[0]) && (mapaArqv[index] == '#'))
+				else if((index == pos[0]) && (nivel[index] == '#'))
 				{
 					isGameOver = 1;
 				}
@@ -61,7 +63,7 @@ int ImprimeMapa(int pos[5])
 			}
 			if(isSnake == 0)
 			{
-				printf("%c", mapaArqv[index]);
+				printf("%c", nivel[index]);
 			}
 			
 			x++;
@@ -75,15 +77,17 @@ int ImprimeMapa(int pos[5])
 	return isGameOver;
 }
 	
-int GeraNumColunas(int nivelId)
+int GeraNumColunas()
 {
+	int colunas;
+
 	if(nivelId == 0)
 	{
-		int colunas = 9;
+		colunas = 9;
 	}
 	else if(nivelId == 1)
 	{
-		int colunas = 21;
+		colunas = 21;
 	}
 	
 	return colunas;
@@ -99,11 +103,11 @@ char LeComando()
 	return comando;
 }
 
-int Movimentacao(int pos[5], int nivelId)
+int Movimentacao(int pos[5])
 {
-	int quit = 0, colunas;
+	int quit = 0, colunas, i;
 	
-	colunas = GeraNumColunas();
+	colunas = GeraNumColunas(nivelId);
 
 	switch (LeComando()) {
 		case 'W':
@@ -163,13 +167,14 @@ int Movimentacao(int pos[5], int nivelId)
 
 void Menu(int pos[5])
 {
- int isGameOver = 0, quit = 0;
- 
- do
- {
-	 CarregaNivel();
-	 isGameOver = movimentacao(pos);
-	 system("clear");
-	 quit = maps(pos);
- }while((isGameOver == 1) && (quit == 1));
+	int isGameOver = 0, quit = 0;
+	
+	CarregaNivel();
+
+	do
+	{
+		isGameOver = Movimentacao(pos);
+		system("clear");
+		quit = ImprimeMapa(pos, &nivel);
+	}while((isGameOver == 1) && (quit == 1));
 }
