@@ -13,7 +13,6 @@ void CarregaNivel(int nivelId)
 		char nivel[110];
 	 	mapaArqv = fopen("maps/test", "r");
   		fread(nivel, 1, 110, mapaArqv);
-		nivel[110] = nivel[110];
 	}
 
 	else if(nivelId == 1)
@@ -21,7 +20,6 @@ void CarregaNivel(int nivelId)
 		char nivel[209];
 		mapaArqv = fopen("maps/1", "r");
 		fread(nivel, 1, 209, mapaArqv);
-		nivel[209] = nivel[209];
 	}
 }
 
