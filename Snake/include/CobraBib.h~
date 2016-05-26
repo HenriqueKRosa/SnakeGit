@@ -2,8 +2,8 @@
 #define CobraBib
 
 int GeraNumColunas();
-char CarregaNivel();
-int ImprimeMapa(int pos[5], char* nivel);
+void CarregaNivel();
+int ImprimeMapa(int pos[5], char nivel);
 char LeComando();
 int Maps(int pos[5]);
 int Movimentacao(int pos[5]);

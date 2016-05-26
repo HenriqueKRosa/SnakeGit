@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include "include/CobraBib.h"
 #include <stdlib.h>
-
+extern char nivel[200];
 extern int nivelId;
 
 void CarregaNivel()
@@ -12,22 +12,22 @@ void CarregaNivel()
 
 	if(nivelId == 0)
 	{
-		char nivel[110];
 	 	mapaArqv = fopen("maps/test", "r");
   		fread(nivel, 1, 110, mapaArqv);
+		fclose(mapaArqv);
 	}
 
 	else if(nivelId == 1)
 	{
-		char nivel[209];
 		mapaArqv = fopen("maps/1", "r");
 		fread(nivel, 1, 209, mapaArqv);
+		fclose(mapaArqv);
 	}
 }
 
-int ImprimeMapa(int pos[5], char* nivel)
+int ImprimeMapa(int pos[5])
 {
-	int index = 0, isSnake = 0, isGameOver = 0, i, x = 0, k, colunas;
+	int index = 0, isSnake = 0, isGameOver = 0, i, k, colunas;
 	
 	colunas = GeraNumColunas();
 
@@ -66,9 +66,8 @@ int ImprimeMapa(int pos[5], char* nivel)
 				printf("%c", nivel[index]);
 			}
 			
-			x++;
+			index++;
 			isSnake = 0;
-			
 			if(i == 9)
 				printf("\n");
 		}
@@ -175,6 +174,6 @@ void Menu(int pos[5])
 	{
 		isGameOver = Movimentacao(pos);
 		system("clear");
-		quit = ImprimeMapa(pos, &nivel);
-	}while((isGameOver == 1) && (quit == 1));
+		quit = ImprimeMapa(pos);
+	}while((isGameOver != 1) && (quit != 1));
 }
