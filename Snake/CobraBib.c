@@ -3,8 +3,14 @@
 #include <ctype.h>
 #include "include/CobraBib.h"
 #include <stdlib.h>
-extern char nivel[200];
+extern char nivel[110];
 extern int nivelId;
+
+struct str_Cobra
+{
+	int pos;
+	struct str_Cobra *next;
+};
 
 void CarregaNivel()
 {
