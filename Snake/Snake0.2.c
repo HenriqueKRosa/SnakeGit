@@ -3,7 +3,7 @@
 #include "include/CobraBib.h"
 #include <string.h>
 int nivelId;
-char nivel[110];
+char nivel[220];
 
 int main() 
 {
