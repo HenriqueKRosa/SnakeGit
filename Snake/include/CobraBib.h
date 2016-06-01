@@ -9,9 +9,8 @@ typedef struct str_Cobra
 } Cobra;
 int GeraNumColunas();
 void CarregaNivel();
-int ImprimeMapa(Cobra *head, Cobra *condutor);
+int ImprimeMapa(Cobra *head);
 char LeComando();
-int Maps(Cobra head);
-int Movimentacao(Cobra head);
-void Menu(Cobra head, Cobra condutor);
+int Movimentacao(Cobra *head);
+void Menu(Cobra *head);
 #endif

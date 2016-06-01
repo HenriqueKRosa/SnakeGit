@@ -25,10 +25,12 @@ void CarregaNivel()
 	}
 }
 
-int ImprimeMapa(Cobra *head, Cobra *condutor)
+int ImprimeMapa(Cobra *head)
 {
 	int index = 0, isSnake = 0, isGameOver = 0, i, colunas;
-	
+	Cobra *condutor;
+
+	condutor = head;	
 	colunas = GeraNumColunas();
 
 	while(nivel[index] != '\0')
@@ -104,62 +106,66 @@ char LeComando()
 
 	return comando;
 }
-/*
-int Movimentacao(Cobra head)
+
+int Movimentacao(Cobra *head)
 {
 	int quit = 0, colunas, i;
-	
+	Cobra *tmp, *condutor;	
+
+	condutor = head->next;
+	tmp = head;
+
 	colunas = GeraNumColunas(nivelId);
 
 	switch (LeComando()) {
 		case 'W':
-			pos[4] = 0;
-			
-			for(i = 4; i >= 0; i--)
+			while(condutor != NULL)
 			{
-				if (i == 0)
-					pos[i] = pos[i] - (colunas + 1);
-				else
-					pos[i] = pos[i - 1];
+				condutor->pos = tmp->pos;
+				if(tmp == head)
+				{
+					head->pos = head->pos - (colunas + 1);
+				}
+				tmp = tmp->next;
+				condutor = condutor->next;
 			}
 			break;
-		
 		case 'S':
-			pos[4] = 0;
-			
-			for(i = 4; i >= 0; i--)
+			while(condutor != NULL)
 			{
-				if (i == 0)
-					pos[i] = pos[i] + (colunas + 1);
-				else
-					pos[i] = pos[i - 1];
+				condutor->pos = tmp->pos;
+				if(tmp == head)
+				{
+					head->pos = head->pos + (colunas + 1);
+				}
+				tmp = tmp->next;
+				condutor = condutor->next;
 			}
-			break;
-		
+			break;	
 		case 'A':
-			pos[4] = 0;
-			
-			for(i = 4; i >= 0; i--)
+			while(condutor != NULL)
 			{
-				if (i == 0)
-					pos[i] = pos[i] - 1;
-				else
-					pos[i] = pos[i - 1];
+				condutor->pos = tmp->pos;
+				if(tmp == head)
+				{
+					head->pos = head->pos - 1;
+				}
+				tmp = tmp->next;
+				condutor = condutor->next;
 			}
 			break;
-		
 		case 'D':
-			pos[4] = 0;
-			
-			for(i = 4; i >= 0; i--)
+			while(condutor != NULL)
 			{
-				if (i == 0)
-					pos[i] = pos[i] + 1;
-				else
-					pos[i] = pos[i - 1];
+				condutor->pos = tmp->pos;
+				if(tmp == head)
+				{
+					head->pos = head->pos + 1;
+				}
+				tmp = tmp->next;
+				condutor = condutor->next;
 			}
 			break;
-		
 		case 'Q':
 			quit = 1;
 			break;
@@ -167,7 +173,7 @@ int Movimentacao(Cobra head)
 	return quit;
 }
 
-void Menu(Cobra *head, Cobra *condutor)
+void Menu(Cobra *head)
 {
 	int isGameOver = 0, quit = 0;
 	
@@ -177,7 +183,7 @@ void Menu(Cobra *head, Cobra *condutor)
 	{
 		isGameOver = Movimentacao(head);
 		system("clear");
-		quit = ImprimeMapa(head, condutor);
-	}while((isGameOver != 1) && (quit != 1));
+		quit = ImprimeMapa(head);
+	}while((isGameOver != 1) && (quit == 1));
 }
-*/
+

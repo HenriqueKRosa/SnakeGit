@@ -13,5 +13,7 @@ CobraBib.o: CobraBib.c
 	@echo "************"
 
 clean:
-	@-rm -f *.o *.c~
+	@-rm -f *.o *.c~ *.swp
+	@echo "*********************************"	
 	@echo "AQUI NOIS CONSTRÓI COBRA CARALHO"
+	@echo "*********************************"
