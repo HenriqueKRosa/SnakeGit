@@ -6,12 +6,6 @@
 extern char nivel[220];
 extern int nivelId;
 
-struct str_Cobra
-{
-	int pos;
-	struct str_Cobra *next;
-};
-
 void CarregaNivel()
 {
 	FILE *mapaArqv;
@@ -31,9 +25,9 @@ void CarregaNivel()
 	}
 }
 
-int ImprimeMapa(int pos[5])
+int ImprimeMapa(Cobra *head, Cobra *condutor)
 {
-	int index = 0, isSnake = 0, isGameOver = 0, i, k, colunas;
+	int index = 0, isSnake = 0, isGameOver = 0, i, colunas;
 	
 	colunas = GeraNumColunas();
 
@@ -41,11 +35,12 @@ int ImprimeMapa(int pos[5])
 	{
 		for(i = 0; i <= colunas; i++)
 		{
-			for(k = 0; k <= 4; k++)
+			if(condutor->next != 0)
+			while(condutor->next != 0)
 			{
-				if((index == pos[k]) && (nivel[index] != '#'))
+				if((index == condutor->pos) && (nivel[index] != '#'))
 				{
-					if (k == 0)
+					if (condutor == head)
 					{
 						printf("@");
 						isSnake = 1;
@@ -57,15 +52,16 @@ int ImprimeMapa(int pos[5])
 						isSnake = 1;
 					}
 				}
-				else if((index == pos[0]) && (nivel[index] == '#'))
+				else if((index == head->pos) && (nivel[index] == '#'))
 				{
 					isGameOver = 1;
 				}
-				if(k > 0)
+				else
 				{
-					if(pos[0] == pos[k])
+					if(head->pos == condutor->pos)
 						isGameOver = 1;
 				}
+				condutor = condutor->next;
 			}
 			if(isSnake == 0)
 			{
@@ -74,6 +70,7 @@ int ImprimeMapa(int pos[5])
 			
 			index++;
 			isSnake = 0;
+			condutor = head;
 			if(i == colunas)
 				printf("\n");
 		}
@@ -107,8 +104,8 @@ char LeComando()
 
 	return comando;
 }
-
-int Movimentacao(int pos[5])
+/*
+int Movimentacao(Cobra head)
 {
 	int quit = 0, colunas, i;
 	
@@ -170,7 +167,7 @@ int Movimentacao(int pos[5])
 	return quit;
 }
 
-void Menu(int pos[5])
+void Menu(Cobra *head, Cobra *condutor)
 {
 	int isGameOver = 0, quit = 0;
 	
@@ -178,8 +175,9 @@ void Menu(int pos[5])
 
 	do
 	{
-		isGameOver = Movimentacao(pos);
+		isGameOver = Movimentacao(head);
 		system("clear");
-		quit = ImprimeMapa(pos);
+		quit = ImprimeMapa(head, condutor);
 	}while((isGameOver != 1) && (quit != 1));
 }
+*/
