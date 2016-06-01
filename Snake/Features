@@ -5,7 +5,7 @@ High priority:
 - Collision restarts the game, unless it's a stone, then snake is reduced by one in size.
 - Snake minimum size.
 - Snake has multiple lifes that are consumed after fatal collisions. Then snake becomes of minimum size and score is kept.
--  Scoreboard.
+- Scoreboard.
 - In case snake lost all it's lifes, the score is saved, zeroed and the games returns to level 1.
 - Mouses and apples are food, mouses are generated from time to time in random positions, and apples are generated once per level and when eaten takes the player to the next level.
 - The game slowly speeds up depending only on the time.
@@ -13,4 +13,4 @@ High priority:
 - *Quit when "q" is pressed.
 - Game shows 15 best scores and command list, the game asks player name when the game ends, and if is in the 15 best, it stores it.
 
-- DEADLINE JUNE 17 -
+- DEADLINE JUNE 24 -

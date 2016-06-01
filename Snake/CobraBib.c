@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include "include/CobraBib.h"
 #include <stdlib.h>
-extern char nivel[110];
+extern char nivel[220];
 extern int nivelId;
 
 struct str_Cobra
@@ -26,7 +26,7 @@ void CarregaNivel()
 	else if(nivelId == 1)
 	{
 		mapaArqv = fopen("maps/1", "r");
-		fread(nivel, 1, 209, mapaArqv);
+		fread(nivel, 1, 220, mapaArqv);
 		fclose(mapaArqv);
 	}
 }
@@ -74,7 +74,7 @@ int ImprimeMapa(int pos[5])
 			
 			index++;
 			isSnake = 0;
-			if(i == 9)
+			if(i == colunas)
 				printf("\n");
 		}
 	}
@@ -92,7 +92,7 @@ int GeraNumColunas()
 	}
 	else if(nivelId == 1)
 	{
-		colunas = 21;
+		colunas = 19;
 	}
 	
 	return colunas;

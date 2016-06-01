@@ -3,7 +3,7 @@
 #include "include/CobraBib.h"
 #include <string.h>
 int nivelId;
-char nivel[110];
+char nivel[220];
 
 int main() 
 {
@@ -13,7 +13,7 @@ int main()
 	
 	printf("Selecione o mapa:(Apenas 0||1 no momento)\n");
 	scanf("%d", &nivelId);
-	pos[0] = 104;
+	pos[0] = 54;
 	
 	CarregaNivel();
 	ImprimeMapa(pos);
