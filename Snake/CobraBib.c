@@ -121,7 +121,7 @@ int Movimentacao(Cobra *head)
 		case 'W':
 			while(condutor != NULL)
 			{
-				condutor->pos = tmp->pos;
+				tmp->pos = condutor->pos;
 				if(tmp == head)
 				{
 					head->pos = head->pos - (colunas + 1);
@@ -172,18 +172,3 @@ int Movimentacao(Cobra *head)
 	}
 	return quit;
 }
-
-void Menu(Cobra *head)
-{
-	int isGameOver = 0, quit = 0;
-	
-	CarregaNivel();
-
-	do
-	{
-		isGameOver = Movimentacao(head);
-		system("clear");
-		quit = ImprimeMapa(head);
-	}while((isGameOver != 1) && (quit == 1));
-}
-

@@ -11,7 +11,5 @@ int GeraNumColunas();
 void CarregaNivel();
 int ImprimeMapa(Cobra *head);
 char LeComando();
-int Maps(Cobra *head);
 int Movimentacao(Cobra *head);
-void Menu(Cobra *head);
 #endif
