@@ -28,10 +28,6 @@ int main()
 	cobra4->pos = 58;
 	cobra4->next = 0;
 
-	op = Menu();
-
-	if(op == 1)
-	{
 		printf("Selecione o mapa:(Apenas 0||1 no momento)\n");
 		scanf("%d", &nivelId);
 
@@ -40,12 +36,6 @@ int main()
 	
 		Jogo(head);
 		printf("GAME OVER\n");
-	}
-	else if(op == 3)
-	{
-		system("clear");
-		printf("See You!\n");
-	}
 
 	return 0;
 }

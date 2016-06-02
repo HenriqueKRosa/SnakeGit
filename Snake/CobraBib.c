@@ -28,6 +28,7 @@ void CarregaNivel()
 int ImprimeMapa(Cobra *head)
 {
 	int index = 0, isSnake = 0, isGameOver = 0, i, colunas;
+	int isPosOfSnake, isNotWall;
 	Cobra *condutor;
 
 	condutor = head;	
@@ -37,33 +38,34 @@ int ImprimeMapa(Cobra *head)
 	{
 		for(i = 0; i <= colunas; i++)
 		{
-			if(condutor->next != 0)
-			while(condutor->next != 0)
+			while(condutor->next != NULL)
 			{
-				if((index == condutor->pos) && (nivel[index] != '#'))
+				isPosOfSnake = (index == condutor->pos);
+				isNotWall = (nivel[index] != '#');
+
+				if(isPosOfSnake && isNotWall)
 				{
 					if (condutor == head)
 					{
 						printf("@");
 						isSnake = 1;
 					}
-					
-					else
+					else if(isSnake != 1)
 					{
 						printf("*");
 						isSnake = 1;
 					}
 				}
-				else if((index == head->pos) && (nivel[index] == '#'))
+				else if (condutor != head)
 				{
-					isGameOver = 1;
-				}
-				else
-				{
-					if(head->pos == condutor->pos)
+					if((head->pos == condutor->pos) && (condutor != head->next))
 						isGameOver = 1;
 				}
 				condutor = condutor->next;
+			}
+			if((index == head->pos) && (nivel[index] == '#'))
+			{
+				isGameOver = 1;
 			}
 			if(isSnake == 0)
 			{
@@ -77,7 +79,6 @@ int ImprimeMapa(Cobra *head)
 				printf("\n");
 		}
 	}
-	
 	return isGameOver;
 }
 	
@@ -110,65 +111,64 @@ char LeComando()
 int Movimentacao(Cobra *head)
 {
 	int quit = 0, colunas, i;
-	Cobra *tmp, *condutor;	
-
-	condutor = head->next;
-	tmp = head;
 
 	colunas = GeraNumColunas(nivelId);
 
 	switch (LeComando()) {
 		case 'W':
-			while(condutor != NULL)
-			{
-				tmp->pos = condutor->pos;
-				if(tmp == head)
-				{
-					head->pos = head->pos - (colunas + 1);
-				}
-				tmp = tmp->next;
-				condutor = condutor->next;
-			}
+			DeletaCobra(head);
+			CriaNovaCobra(head);
+			head->pos = head->pos - colunas - 1;
 			break;
 		case 'S':
-			while(condutor != NULL)
-			{
-				condutor->pos = tmp->pos;
-				if(tmp == head)
-				{
-					head->pos = head->pos + (colunas + 1);
-				}
-				tmp = tmp->next;
-				condutor = condutor->next;
-			}
-			break;	
+			DeletaCobra(head);
+			CriaNovaCobra(head);
+			head->pos = head->pos + colunas + 1;
+			break;
 		case 'A':
-			while(condutor != NULL)
-			{
-				condutor->pos = tmp->pos;
-				if(tmp == head)
-				{
-					head->pos = head->pos - 1;
-				}
-				tmp = tmp->next;
-				condutor = condutor->next;
-			}
+			DeletaCobra(head);
+			CriaNovaCobra(head);
+			head->pos = head->pos - 1;
 			break;
 		case 'D':
-			while(condutor != NULL)
-			{
-				condutor->pos = tmp->pos;
-				if(tmp == head)
-				{
-					head->pos = head->pos + 1;
-				}
-				tmp = tmp->next;
-				condutor = condutor->next;
-			}
+			DeletaCobra(head);
+			CriaNovaCobra(head);
+			head->pos = head->pos + 1;
+			break;
+		case '+':
+			CriaNovaCobra(head);
+			break;
+		case '-':
+			DeletaCobra(head);
 			break;
 		case 'Q':
 			quit = 1;
 			break;
 	}
 	return quit;
+}
+
+void CriaNovaCobra(Cobra *head)
+{
+	Cobra *nova;
+
+	nova = malloc(sizeof(Cobra));
+	nova->pos = head->pos;
+	nova->next = head->next;
+	head->next = nova;
+}
+
+void DeletaCobra(Cobra *head)
+{
+	Cobra *tmp;
+
+	tmp = head;
+
+	while(tmp->next->next != NULL)
+	{
+		tmp = tmp->next;
+	}
+	free(tmp->next);
+	tmp->next = NULL;
+	
 }

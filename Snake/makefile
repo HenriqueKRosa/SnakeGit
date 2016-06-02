@@ -1,7 +1,7 @@
 all: Snekao
 
 Snekao: Snake0.2.c CobraBib.o MenuBib.o
-	@gcc -o Snake1 Snake0.2.c CobraBib.o MenuBib.o
+	@gcc -o Snake1 Snake0.2.c CobraBib.o MenuBib.o -lncurses
 	@echo "*********************"	
 	@echo " HORA DO SNAKE PORRA"
 	@echo "*********************"	

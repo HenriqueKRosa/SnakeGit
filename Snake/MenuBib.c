@@ -1,21 +1,22 @@
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <ncurses.h>
 #include "include/CobraBib.h"
 #include "include/MenuBib.h"
 #include <stdlib.h>
 
 void Print_Title(){
     printf("############################################################\n");
-    printf("#                                                          #\n");
-    printf("#   /----   |\\       |         /\\         |   /  |-------  #\n");
+    printf("#                                                 _______  #\n");
+    printf("#   /----   |\\       |         /\\         |   /  |         #\n");
     printf("#  /        | \\      |        /  \\        |  /   |         #\n");
     printf("#  |        |  \\     |       /    \\       | /    |         # \n");
     printf("#  \\----    |   \\    |      /      \\      |/     |         #\n");
-    printf("#        \\  |    \\   |     /--------\\     |\\     |-------  #\n");
+    printf("#        \\  |    \\   |     /--------\\     |\\     |======   #\n");
     printf("#         | |     \\  |    /          \\    | \\    |         #\n");
     printf("#  \\     /  |      \\ |   /            \\   |  \\   |         #\n");
-    printf("#   ----/   |       \\|  /              \\  |   \\  |-------  #\n");
+    printf("#   ----/   |       \\|  /              \\  |   \\  |_______  #\n");
     printf("#                                                          #\n");
     printf("############################################################\n\n");
 }
@@ -56,12 +57,12 @@ int Menu() {
 
     do
     {
-        system("clear");
+        system("cls");
         Print_Title();
         Create_Menu_Option("Iniciar jogo\n", 1, &Option_Number);
         Create_Menu_Option("Scoreboard\n", 2, &Option_Number);
         Create_Menu_Option("Sair\n", 3, &Option_Number);
-        scanf("%c", &Users_Input);
+        getch();
         if(Users_Input == 'w' && Option_Number > 1)
         {
             Option_Number--;
@@ -84,9 +85,9 @@ void Jogo(Cobra *head)
 
 	do
 	{
-		isGameOver = Movimentacao(head);
+		quit = Movimentacao(head);
 		system("clear");
-		quit = ImprimeMapa(head);
-	}while((isGameOver != 1) && (quit == 1));
+		isGameOver = ImprimeMapa(head);
+	}while((isGameOver != 1) && (quit != 1));
 }
 

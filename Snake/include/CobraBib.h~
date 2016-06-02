@@ -1,7 +1,6 @@
 #ifndef CobraBib
 #define CobraBib
 
-
 typedef struct str_Cobra
 {
 	int pos;
