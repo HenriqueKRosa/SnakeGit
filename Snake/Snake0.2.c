@@ -14,11 +14,13 @@ int main()
 	scanf("%d", &nivelId);
 
 	CarregaNivel();
-	head = IniciaCobra();
+	head = IniciaCobra(head);
 	ImprimeMapa(head);
 	
 	Jogo(head);
 	printf("GAME OVER\n");
 
+	getch();
+	
 	return 0;
 }

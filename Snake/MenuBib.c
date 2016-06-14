@@ -1,10 +1,11 @@
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
-#include <ncurses.h>
 #include "include/CobraBib.h"
 #include "include/MenuBib.h"
 #include <stdlib.h>
+extern int nivelId;
+
 
 void Print_Title(){
     printf("############################################################\n");
@@ -86,8 +87,12 @@ void Jogo(Cobra *head)
 	do
 	{
 		quit = Movimentacao(head);
-		system("clear");
+		system("cls");
 		isGameOver = ImprimeMapa(head);
 	}while((isGameOver != 1) && (quit != 1));
 }
 
+void GUI(int lifes, int points, int mouses)
+{
+		printf("Nivel: %d               Vidas: %d               Pontos: %d               Ratos: %d", nivelId, lifes, points, mouses);
+}

@@ -102,7 +102,7 @@ char LeComando()
 {
 	char comando;
 
-	scanf("%c", &comando);
+	comando = getch();
 	comando = toupper(comando);
 
 	return comando;
@@ -173,9 +173,9 @@ void DeletaCobra(Cobra *head)
 	
 }
 
-Cobra* IniciaCobra()
+Cobra* IniciaCobra(Cobra *head)
 {
-	Cobra *head, *cobra1, *cobra2, *cobra3;
+	Cobra *cobra1, *cobra2, *cobra3;
 
 	head = malloc(sizeof(Cobra));
 	cobra1 = malloc(sizeof(Cobra));
