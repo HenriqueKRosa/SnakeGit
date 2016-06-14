@@ -4,6 +4,7 @@
 typedef struct str_Cobra
 {
 	int pos;
+	//int hasFood;
 	struct str_Cobra *next;
 } Cobra;
 int GeraNumColunas();
