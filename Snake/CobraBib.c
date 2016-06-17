@@ -9,6 +9,7 @@ extern int nivelId;
 void CarregaNivel()
 {
 	FILE *mapaArqv;
+	int colunas, linhas;
 
 	if(nivelId == 0)
 	{
@@ -23,6 +24,19 @@ void CarregaNivel()
 		fread(nivel, 1, 220, mapaArqv);
 		fclose(mapaArqv);
 	}
+	
+	/*else if(nivelId == 2)
+	{
+			mapaArqv = fopen("maps/2.txt", "r");
+			if(!mapaArqv)
+				printf("ERRO NO CARREGAMENTO DO NIVEL, REINICIE POR FAVOR!\n");
+			else
+			{
+				linhas = getw(mapaArqv);
+				
+				fread()	
+			}
+	}*/
 }
 
 int ImprimeMapa(Cobra *head)
