@@ -15,25 +15,36 @@ void GetLinECol(int *linhas, int *colunas, FILE *mapaArqv)
 	*colunas = atoi(infos);
 }
 
-void strcpy2(char nivel[220], int colunas, char linha[colunas])
+void strcpy2(char *nivel, int pos, char *linha)
 {
+		int i = 0;
 		
+		while( linha[i] != '\0' )
+		{
+			nivel[pos+i] = linha[i];
+			i++;
+		}		
 }
 
-void makeMapa(FILE *mapaArqv, int *colunas, int *linhas, char nivel[220])
+void makeMapa(FILE *mapaArqv, int colunas, int linhas, char nivel[220])
 {
-	char linha[*colunas];
+	char linha[colunas];
 	int pos = 0;
-	int i;
+	int i, where;
 	
-	fseek(mapaArqv, 7, SEEK_SET);
-	for(i = 0; i <= *linhas; i++)
+	fseek(mapaArqv, 8, SEEK_SET);
+	for(i = 0; i < linhas; i++)
 	{
-		fgets(linha, *colunas, mapaArqv);
-		printf("%s\n", linha);
-		strcpy((nivel+pos), linha);
-		pos = pos + *colunas;
-		printf("%d, %d", &nivel[pos], pos);
+		fseek(mapaArqv,2,SEEK_CUR);
+		puts("Antes:");
+		where = ftell(mapaArqv);
+		printf("%d\n", where);
+		fgets(linha, colunas+1, mapaArqv);
+		puts("Dps:");
+		where = ftell(mapaArqv);
+		printf("%d\n", where);
+		strcpy2(nivel, pos, linha);
+		pos = pos + colunas;
 	}
 }
 
@@ -43,6 +54,7 @@ int main()
 	int colunas, linhas;
 	char nivel[220];
 	
+	memset(nivel,0,sizeof(nivel));
 	mapaArqv = fopen("maps/2.txt", "r");
 	if(!mapaArqv)
 		printf("ERRO NO CARREGAMENTO DO NIVEL, REINICIE POR FAVOR!\n");
@@ -51,9 +63,10 @@ int main()
 		GetLinECol(&linhas, &colunas, mapaArqv);
 	}
 	printf("Num Linhas: %d\nNum Cols: %d\n", linhas, colunas);
-	
-	makeMapa(mapaArqv, &colunas, &linhas, nivel);
+	puts("Linhas:");
+	makeMapa(mapaArqv, colunas, linhas, nivel);
 	fclose(mapaArqv);
+	puts("MAPA:");
 	printf("%s\n", nivel);
 	getch();
 return 0;

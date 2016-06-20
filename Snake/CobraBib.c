@@ -6,11 +6,28 @@
 extern char nivel[220];
 extern int nivelId;
 
+void GetLinECol(int *linhas, int *colunas, FILE *mapaArqv)
+{
+	char space[2] = " ";
+	char *infos;
+	char linEcol[7];
+	
+	fgets(linEcol, 6, mapaArqv);
+	infos = strtok(linEcol, space);
+	*linhas = atoi(infos);
+	
+	infos = strtok(NULL, space);
+	*colunas = atoi(infos);
+}
+
 void CarregaNivel()
 {
 	FILE *mapaArqv;
 	int colunas, linhas;
-
+	char *infos;
+	char space[2] = " ";
+	char linEcol[7];
+	
 	if(nivelId == 0)
 	{
 	 	mapaArqv = fopen("maps/test", "r");
@@ -25,18 +42,17 @@ void CarregaNivel()
 		fclose(mapaArqv);
 	}
 	
-	/*else if(nivelId == 2)
+	else if(nivelId == 2)
 	{
-			mapaArqv = fopen("maps/2.txt", "r");
-			if(!mapaArqv)
-				printf("ERRO NO CARREGAMENTO DO NIVEL, REINICIE POR FAVOR!\n");
-			else
-			{
-				linhas = getw(mapaArqv);
-				
-				fread()	
-			}
-	}*/
+		mapaArqv = fopen("maps/2.txt", "r");
+		if(!mapaArqv)
+			printf("ERRO NO CARREGAMENTO DO NIVEL, REINICIE POR FAVOR!\n");
+		else
+		{
+			GetLinECol(&linhas, &colunas, mapaArqv);
+			fclose(mapaArqv);
+		}
+	}
 }
 
 int ImprimeMapa(Cobra *head)
