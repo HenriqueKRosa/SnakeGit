@@ -128,3 +128,26 @@ do
     WSControl(1, 3, &Users_Input, &Stage_Number);
 }while(Users_Input != 13);
 }
+void Show_Scoreboard ()
+{
+    char User_Input;
+    Imprime_Jogadores();
+    printf("\n  >Voltar\n");
+    while(User_Input != 13)
+    {
+        User_Input = getch();
+    }
+}
+void Imprime_Jogadores()
+{
+    FILE* jogadores;
+    Player jogador;
+    int i;
+    jogadores = fopen("scoreboard.bin", "rb");
+    for(i=1;i<=15;i++)
+    {
+        printf(" %d. ", i);
+        fread(&jogador, sizeof(jogador), 1, jogadores);
+        printf("%s\n", jogador.nome);
+    }
+}
