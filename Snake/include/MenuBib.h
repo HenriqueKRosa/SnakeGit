@@ -8,5 +8,5 @@ void Jogo(Cobra *head);
 void GUI(Player AAA);
 void GetPlayerName(Player* AAA);
 void Imprime_Jogadores();
-void Scoreboard();
+void Show_Scoreboard();
 #endif
