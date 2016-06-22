@@ -1,11 +1,15 @@
 #ifndef CobraBib
 #define CobraBib
 
-int GeraNumColunas();
-void CarregaNivel();
-int ImprimeMapa(int pos[5]);
+typedef struct str_Cobra
+{
+	int pos;
+	//int hasFood;
+	struct str_Cobra *next;
+} Cobra;
 char LeComando();
-int Maps(int pos[5]);
-int Movimentacao(int pos[5]);
-void Menu(int pos[5]);
+int Movimentacao(Cobra *head);
+void DeletaCobra(Cobra *head);
+void CriaNovaCobra(Cobra *head);
+Cobra* IniciaCobra(Cobra *head);
 #endif
