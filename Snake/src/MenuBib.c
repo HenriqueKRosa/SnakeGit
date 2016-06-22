@@ -1,9 +1,11 @@
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
-#include "include/CobraBib.h"
-#include "include/MenuBib.h"
-#include "include/PlayerBib.h"
+#include "../include/CobraBib.h"
+#include "../include/PlayerBib.h"
+#include "../include/NivelBib.h"
+#include "../include/MenuBib.h"
+#include <conio.h>
 #include <stdlib.h>
 extern int nivelId;
 
@@ -21,6 +23,7 @@ void Print_Title(){
     printf("#                                                          #\n");
     printf("############################################################\n\n");
 }
+
 void Create_Menu_Option(char Option_Text[20], int Menu_Number, int* Option_Number){
 
     int i;

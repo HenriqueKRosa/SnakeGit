@@ -6,5 +6,6 @@ void Create_Menu_Option(char Option_Text[20], int Menu_Number, int* Option_Numbe
 int Menu();
 void Jogo(Cobra *head);
 void GUI(Player AAA);
-void GetPlayerName(Player* AAA);
+void Stage_selection();
+void WSControl(int Min_Option_Num, int Max_Option_Num, char* Users_Input, int* Stage_Number);
 #endif

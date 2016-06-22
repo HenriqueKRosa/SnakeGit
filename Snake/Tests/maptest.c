@@ -51,21 +51,14 @@ int main()
 	int colunas, linhas;
 	char nivel[220];
 	
-	memset(nivel,0,sizeof(nivel));
 	mapaArqv = fopen("maps/2.txt", "r");
 	if(!mapaArqv)
 		printf("ERRO NO CARREGAMENTO DO NIVEL, REINICIE POR FAVOR!\n");
 	else
 	{
 		GetLinECol(&linhas, &colunas, mapaArqv);
+		makeMapa(mapaArqv, colunas, linhas, nivel);		
 	}
-	printf("Num Linhas: %d\nNum Cols: %d\n", linhas, colunas);
 	
-	makeMapa(mapaArqv, colunas, linhas, nivel);
-	
-	puts("MAPA:");
-	puts(nivel);
-	printf("%d\n", strlen(nivel));
-	getch();
 return 0;
 }

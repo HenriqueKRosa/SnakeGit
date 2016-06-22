@@ -1,15 +1,16 @@
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
-#include "include/CobraBib.h"
-#include "include/MenuBib.h"
-#include "include/NivelBib.h"
-#include "include/PlayerBib.h"
+#include "../include/CobraBib.h"
+#include "../include/PlayerBib.h"
+#include "../include/MenuBib.h"
+#include "../include/NivelBib.h"
 #include <stdlib.h>
 extern char nivel[500];
 extern int nivelId;
+extern int colunas;
 
-void GetLinECol(int *linhas, int *colunas, FILE *mapaArqv)
+void GetLinECol(int *linhas, FILE *mapaArqv)
 {
 	char space[2] = " ";
 	char *infos;
@@ -20,7 +21,7 @@ void GetLinECol(int *linhas, int *colunas, FILE *mapaArqv)
 	*linhas = atoi(infos);
 	
 	infos = strtok(NULL, space);
-	*colunas = atoi(infos);
+	colunas = atoi(infos);
 }
 
 void strcpy2(char *dest, int pos, char *src)
@@ -34,11 +35,11 @@ void strcpy2(char *dest, int pos, char *src)
 		}while( src[i] != '\0' );		
 }
 
-void makeMapa(FILE *mapaArqv, int colunas, int linhas, char *nivel)
+void makeMapa(FILE *mapaArqv, int linhas, char *nivel)
 {
 	char linha[colunas];
 	int pos = 0;
-	int i, where;
+	int i;
 	
 	fseek(mapaArqv, 8, SEEK_SET);
 	for(i = 0; i <= linhas; i++)
@@ -53,50 +54,52 @@ void makeMapa(FILE *mapaArqv, int colunas, int linhas, char *nivel)
 	fclose(mapaArqv);
 }
 
-
 void CarregaNivel()
 {
 	FILE *mapaArqv;
-	int colunas, linhas;
-	char *infos;
-	char space[2] = " ";
-	char linEcol[7];
+	int linhas;
 	
 	if(nivelId == 0)
 	{
-	 	mapaArqv = fopen("maps/test", "r");
-  		fread(nivel, 1, 110, mapaArqv);
-		fclose(mapaArqv);
+	 	if((mapaArqv = fopen("maps/test", "r")) == NULL)
+			perror("NAO VAI DA NAO");
+		else
+		{
+			GetLinECol(&linhas, mapaArqv);
+			makeMapa(mapaArqv, linhas, nivel);
+		}
 	}
 
 	else if(nivelId == 1)
 	{
-		mapaArqv = fopen("maps/1", "r");
-		fread(nivel, 1, 220, mapaArqv);
-		fclose(mapaArqv);
+	 	if((mapaArqv = fopen("maps/1.txt", "r")) == NULL)
+			perror("NAO VAI DA NAO");
+		else
+		{
+		GetLinECol(&linhas, mapaArqv);
+		makeMapa(mapaArqv, linhas, nivel);
+		}
 	}
 	
 	else if(nivelId == 2)
 	{
-		mapaArqv = fopen("maps/2.txt", "r");
-		if(!mapaArqv)
-			printf("ERRO NO CARREGAMENTO DO NIVEL, REINICIE POR FAVOR!\n");
+	 	if((mapaArqv = fopen("maps/2.txt", "r")) == NULL)
+			perror("NAO VAI DA NAO");
 		else
 		{
-			GetLinECol(&linhas, &colunas, mapaArqv);
-			fclose(mapaArqv);
+			GetLinECol(&linhas, mapaArqv);
+			makeMapa(mapaArqv, linhas, nivel);
 		}
 	}
 }
 
 int ImprimeMapa(Cobra *head)
 {
-	int index = 0, isSnake = 0, isGameOver = 0, i, colunas;
+	int index = 0, isSnake = 0, isGameOver = 0, i;
 	int isPosOfSnake, isNotWall;
 	Cobra *condutor;
 
-	condutor = head;	
-	colunas = GeraNumColunas();
+	condutor = head;
 
 	while(nivel[index] != '\0')
 	{
