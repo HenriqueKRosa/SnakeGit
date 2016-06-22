@@ -46,8 +46,6 @@ void makeMapa(FILE *mapaArqv, int linhas, char *nivel) //Carrega o mapa "matriz"
 	{
 		fgets(linha, colunas+1, mapaArqv);
 		strcpy2(nivel, pos, linha);
-		puts(linha);
-		puts(nivel);
 		fseek(mapaArqv, 2, SEEK_CUR);
 		pos += colunas;
 	}
@@ -103,7 +101,7 @@ int ImprimeMapa(Cobra *head)
 
 	while(nivel[index] != '\0')
 	{
-		for(i = 0; i <= colunas; i++)
+		for(i = 0; i < colunas; i++)
 		{
 			while(condutor->next != NULL)
 			{
@@ -142,7 +140,7 @@ int ImprimeMapa(Cobra *head)
 			index++;
 			isSnake = 0;
 			condutor = head;
-			if(i == colunas)
+			if(i == colunas-1)
 				printf("\n");
 		}
 	}

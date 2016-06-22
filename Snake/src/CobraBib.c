@@ -29,12 +29,12 @@ int Movimentacao(Cobra *head)
 		case 'W':
 			DeletaCobra(head);
 			CriaNovaCobra(head);
-			head->pos = head->pos - colunas - 1;
+			head->pos = head->pos - colunas;
 			break;
 		case 'S':
 			DeletaCobra(head);
 			CriaNovaCobra(head);
-			head->pos = head->pos + colunas + 1;
+			head->pos = head->pos + colunas;
 			break;
 		case 'A':
 			DeletaCobra(head);

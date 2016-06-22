@@ -10,7 +10,7 @@ int nivelId = 0;
 char nivel[500];
 int colunas;
 
-int main()
+/*int main2()
 {
 	int isGameOver = 0, quit = 0;
 	Cobra *head, *cobra1, *cobra2, *cobra3;
@@ -30,18 +30,23 @@ int main()
 	cobra3->next = NULL;
 	
 	CarregaNivel();
+	ImprimeMapa(head);
 	
-	puts(nivel);
+	do
+	{
+		quit = Movimentacao(head);
+		system("cls");
+		isGameOver = ImprimeMapa(head);
+	}while((isGameOver != 1) && (quit != 1));
+	puts("Game over");
+	getch();
 	return 0;
-}
+}*/
 
-int main1()
+int main()
 {
 		int op;
-		Cobra *head;
-		
-		head = malloc(sizeof(Cobra));
-		
+			
 		Inicio:
 		Print_Title();
 		op = Menu();
@@ -49,7 +54,11 @@ int main1()
 		switch(op)
 		{
 				case 1:
-					Jogo(head);
+					system("cls");
+					Jogo();
+					puts("Press any key to return to main menu.");
+					getch();
+					goto Inicio;
 					break;
 				case 2:
 					Stage_selection();
