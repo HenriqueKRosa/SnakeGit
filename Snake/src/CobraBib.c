@@ -84,7 +84,7 @@ void DeletaCobra(Cobra *head)
 	
 }
 
-Cobra* IniciaCobra(Cobra *head)
+void IniciaCobra(Cobra *head)
 {
 	Cobra *cobra1, *cobra2, *cobra3;
 
@@ -101,6 +101,4 @@ Cobra* IniciaCobra(Cobra *head)
 	cobra2->next = cobra3;
 	cobra3->pos = 0;
 	cobra3->next = NULL;
-
-	return head;
 }

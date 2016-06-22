@@ -10,7 +10,7 @@ extern char nivel[500];
 extern int nivelId;
 extern int colunas;
 
-void GetLinECol(int *linhas, FILE *mapaArqv)
+void GetLinECol(int *linhas, FILE *mapaArqv) //Lê do arquivo o número de linhas e colunas. Obs: colunas é var global.
 {
 	char space[2] = " ";
 	char *infos;
@@ -24,7 +24,7 @@ void GetLinECol(int *linhas, FILE *mapaArqv)
 	colunas = atoi(infos);
 }
 
-void strcpy2(char *dest, int pos, char *src)
+void strcpy2(char *dest, int pos, char *src) //Copia uma string pra dentro de outra a partir da posição "pos".
 {
 		int i = 0;
 		
@@ -35,7 +35,7 @@ void strcpy2(char *dest, int pos, char *src)
 		}while( src[i] != '\0' );		
 }
 
-void makeMapa(FILE *mapaArqv, int linhas, char *nivel)
+void makeMapa(FILE *mapaArqv, int linhas, char *nivel) //Carrega o mapa "matriz" numa string.
 {
 	char linha[colunas];
 	int pos = 0;
@@ -54,14 +54,14 @@ void makeMapa(FILE *mapaArqv, int linhas, char *nivel)
 	fclose(mapaArqv);
 }
 
-void CarregaNivel()
+void CarregaNivel() //Carrega um nível a partir do valor da var global nivelId.
 {
 	FILE *mapaArqv;
 	int linhas;
 	
 	if(nivelId == 0)
 	{
-	 	if((mapaArqv = fopen("maps/test", "r")) == NULL)
+	 	if((mapaArqv = fopen("maps/test.txt", "r")) == NULL)
 			perror("NAO VAI DA NAO");
 		else
 		{
@@ -72,7 +72,7 @@ void CarregaNivel()
 
 	else if(nivelId == 1)
 	{
-	 	if((mapaArqv = fopen("maps/1.txt", "r")) == NULL)
+	 	if((mapaArqv = fopen("../maps/1.txt", "r")) == NULL)
 			perror("NAO VAI DA NAO");
 		else
 		{
@@ -83,7 +83,7 @@ void CarregaNivel()
 	
 	else if(nivelId == 2)
 	{
-	 	if((mapaArqv = fopen("maps/2.txt", "r")) == NULL)
+	 	if((mapaArqv = fopen("../maps/2.txt", "r")) == NULL)
 			perror("NAO VAI DA NAO");
 		else
 		{

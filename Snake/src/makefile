@@ -1,6 +1,3 @@
-##############MAKEFILE##############
-
-#####VARIABLES#####
 #Compiler
 CC=gcc -std=c99 -c
 
@@ -13,18 +10,20 @@ SRC=$(wildcard *.c)
 #Object files
 OBJ=$(SRC:.c=.o)
 
-#Libraries
-#INCLUDE=$(wildcard include/*.h)
-
-
 #####MAKE#####
 all: $(OBJ)
 
 %.o: %.c
-	@echo =========================
+	@echo ==========
 	@echo Bhir $@
-	@echo =========================
+	@echo ==========
 	@$(CC) -o $@ -c $< $(CFLAGS) 
 	@echo -
-	@echo Ta tranquilo, ta compilado.
+	@echo Aqui nois controi cobra!!
 	@echo -
+	
+clean:
+	@del *.o *~
+	@echo ---------------
+	@echo FAMOSA LIMPEZA
+	@echo ---------------

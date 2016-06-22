@@ -13,9 +13,9 @@ TGT=SnakeAlpha
 all: $(TGT)
 
 $(TGT): $(OBJ)
-	@echo ************************
+	@echo ******************
 	@echo GET READY 4 $@
-	@echo ************************
+	@echo ******************
 	@$(CC) -o $(TGT) $(OBJ)
 	@echo ------------------
 	@echo 10DI LEK
@@ -23,3 +23,6 @@ $(TGT): $(OBJ)
 	
 clean:
 	@del *.o *~
+	@echo ---------------
+	@echo FAMOSA LIMPEZA
+	@echo ---------------
