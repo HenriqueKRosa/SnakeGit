@@ -7,11 +7,9 @@ typedef struct str_Cobra
 	//int hasFood;
 	struct str_Cobra *next;
 } Cobra;
-int GeraNumColunas();
-void CarregaNivel();
-int ImprimeMapa(Cobra *head);
 char LeComando();
 int Movimentacao(Cobra *head);
 void DeletaCobra(Cobra *head);
 void CriaNovaCobra(Cobra *head);
+Cobra* IniciaCobra(Cobra *head);
 #endif

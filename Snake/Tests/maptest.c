@@ -15,37 +15,34 @@ void GetLinECol(int *linhas, int *colunas, FILE *mapaArqv)
 	*colunas = atoi(infos);
 }
 
-void strcpy2(char *nivel, int pos, char *linha)
+void strcpy2(char *dest, int pos, char *src)
 {
 		int i = 0;
 		
-		while( linha[i] != '\0' )
+		do
 		{
-			nivel[pos+i] = linha[i];
+			dest[pos+i] = src[i];
 			i++;
-		}		
+		}while( src[i] != '\0' );		
 }
 
-void makeMapa(FILE *mapaArqv, int colunas, int linhas, char nivel[220])
+void makeMapa(FILE *mapaArqv, int colunas, int linhas, char *nivel)
 {
 	char linha[colunas];
 	int pos = 0;
 	int i, where;
 	
 	fseek(mapaArqv, 8, SEEK_SET);
-	for(i = 0; i < linhas; i++)
+	for(i = 0; i <= linhas; i++)
 	{
-		fseek(mapaArqv,2,SEEK_CUR);
-		puts("Antes:");
-		where = ftell(mapaArqv);
-		printf("%d\n", where);
 		fgets(linha, colunas+1, mapaArqv);
-		puts("Dps:");
-		where = ftell(mapaArqv);
-		printf("%d\n", where);
 		strcpy2(nivel, pos, linha);
-		pos = pos + colunas;
+		puts(linha);
+		puts(nivel);
+		fseek(mapaArqv, 2, SEEK_CUR);
+		pos += colunas;
 	}
+	fclose(mapaArqv);
 }
 
 int main()
@@ -63,11 +60,12 @@ int main()
 		GetLinECol(&linhas, &colunas, mapaArqv);
 	}
 	printf("Num Linhas: %d\nNum Cols: %d\n", linhas, colunas);
-	puts("Linhas:");
+	
 	makeMapa(mapaArqv, colunas, linhas, nivel);
-	fclose(mapaArqv);
+	
 	puts("MAPA:");
-	printf("%s\n", nivel);
+	puts(nivel);
+	printf("%d\n", strlen(nivel));
 	getch();
 return 0;
 }

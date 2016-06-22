@@ -1,25 +1,27 @@
-﻿all: Snekao
+COMPIL=gcc -o
 
-Snekao: Snake0.2.c CobraBib.o MenuBib.o
-	@gcc -o Snake1 Snake0.2.c CobraBib.o MenuBib.o	
-	@echo "*********************"	
-	@echo " HORA DO SNAKE PORRA"
-	@echo "*********************"	
+SRCDIR=src
 
-CobraBib.o: CobraBib.c
-	@gcc -o CobraBib.o -c CobraBib.c 
-	@echo "**************"	
-	@echo " 37 COBRA KRL"
-	@echo "**************"
+SRC=$(wildcard $(SRCDIR)/*.c)
+OBJ=$(SRC:.c=.o)
 
-MenuBib.o: MenuBib.c
-	@gcc -o MenuBib.o -c MenuBib.c
-	@echo "****************************"	
-	@echo " TA SAINDO DA JAULA A COBRA"
-	@echo "****************************"	
+#INCLUDE=$(wildcard include/*.h)
 
-clean:
-	@-rm -f *.o *.c~ *.swp
-	@echo "**********************************"	
-	@echo " AQUI NOIS CONSTRÓI COBRA CARALHO"
-	@echo "**********************************"
+EXEC=snake01
+
+####MAKE#####
+all: $(EXEC)
+
+$(EXEC): $(OBJ)
+	@echo ************************
+	@echo 	GET READY 4 $@
+	@echo ************************
+	@$(COMPIL) $@ $^
+	@echo ------------------
+	@echo 	10DI LEK
+	@echo ------------------
+
+$(OBJ): $(SRC)
+		@$(MAKE) -C $(SRCDIR) -s all	
+
+.PHONY: clean 

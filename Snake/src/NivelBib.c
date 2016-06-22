@@ -2,8 +2,11 @@
 #include <stdio.h>
 #include <ctype.h>
 #include "include/CobraBib.h"
+#include "include/MenuBib.h"
+#include "include/NivelBib.h"
+#include "include/PlayerBib.h"
 #include <stdlib.h>
-extern char nivel[220];
+extern char nivel[500];
 extern int nivelId;
 
 void GetLinECol(int *linhas, int *colunas, FILE *mapaArqv)
@@ -19,6 +22,37 @@ void GetLinECol(int *linhas, int *colunas, FILE *mapaArqv)
 	infos = strtok(NULL, space);
 	*colunas = atoi(infos);
 }
+
+void strcpy2(char *dest, int pos, char *src)
+{
+		int i = 0;
+		
+		do
+		{
+			dest[pos+i] = src[i];
+			i++;
+		}while( src[i] != '\0' );		
+}
+
+void makeMapa(FILE *mapaArqv, int colunas, int linhas, char *nivel)
+{
+	char linha[colunas];
+	int pos = 0;
+	int i, where;
+	
+	fseek(mapaArqv, 8, SEEK_SET);
+	for(i = 0; i <= linhas; i++)
+	{
+		fgets(linha, colunas+1, mapaArqv);
+		strcpy2(nivel, pos, linha);
+		puts(linha);
+		puts(nivel);
+		fseek(mapaArqv, 2, SEEK_CUR);
+		pos += colunas;
+	}
+	fclose(mapaArqv);
+}
+
 
 void CarregaNivel()
 {
@@ -111,115 +145,16 @@ int ImprimeMapa(Cobra *head)
 	}
 	return isGameOver;
 }
-	
-int GeraNumColunas()
-{
-	int colunas;
 
-	if(nivelId == 0)
-	{
-		colunas = 9;
+void Print_Map(char Map_Name[20])
+{
+    FILE *Map_File;
+    char ch;
+    char Map_Adress[25] = "maps/";
+    strcat(Map_Adress, Map_Name);
+    Map_File = fopen(Map_Adress, "r");
+    while ( (ch = fgetc(Map_File) ) != EOF) {
+		printf("%c",ch);
 	}
-	else if(nivelId == 1)
-	{
-		colunas = 19;
-	}
-	
-	return colunas;
-}
-
-char LeComando()
-{
-	char comando;
-
-	comando = getch();
-	comando = toupper(comando);
-
-	return comando;
-}
-
-int Movimentacao(Cobra *head)
-{
-	int quit = 0, colunas, i;
-
-	colunas = GeraNumColunas(nivelId);
-
-	switch (LeComando()) {
-		case 'W':
-			DeletaCobra(head);
-			CriaNovaCobra(head);
-			head->pos = head->pos - colunas - 1;
-			break;
-		case 'S':
-			DeletaCobra(head);
-			CriaNovaCobra(head);
-			head->pos = head->pos + colunas + 1;
-			break;
-		case 'A':
-			DeletaCobra(head);
-			CriaNovaCobra(head);
-			head->pos = head->pos - 1;
-			break;
-		case 'D':
-			DeletaCobra(head);
-			CriaNovaCobra(head);
-			head->pos = head->pos + 1;
-			break;
-		case '+':
-			CriaNovaCobra(head);
-			break;
-		case '-':
-			DeletaCobra(head);
-			break;
-		case 'Q':
-			quit = 1;
-			break;
-	}
-	return quit;
-}
-
-void CriaNovaCobra(Cobra *head)
-{
-	Cobra *nova;
-
-	nova = malloc(sizeof(Cobra));
-	nova->pos = head->pos;
-	nova->next = head->next;
-	head->next = nova;
-}
-
-void DeletaCobra(Cobra *head)
-{
-	Cobra *tmp;
-
-	tmp = head;
-
-	while(tmp->next->next != NULL)
-	{
-		tmp = tmp->next;
-	}
-	free(tmp->next);
-	tmp->next = NULL;
-	
-}
-
-Cobra* IniciaCobra(Cobra *head)
-{
-	Cobra *cobra1, *cobra2, *cobra3;
-
-	head = malloc(sizeof(Cobra));
-	cobra1 = malloc(sizeof(Cobra));
-	cobra2 = malloc(sizeof(Cobra));
-	cobra3 = malloc(sizeof(Cobra));
-
-	head->pos = 55;
-	head->next = cobra1;
-	cobra1->pos = 0;
-	cobra1->next = cobra2;
-	cobra2->pos = 0;
-	cobra2->next = cobra3;
-	cobra3->pos = 0;
-	cobra3->next = NULL;
-
-	return head;
+	fclose(Map_File);
 }
