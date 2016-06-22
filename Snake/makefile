@@ -1,4 +1,4 @@
-COMPIL=gcc -o
+CC=gcc
 
 SRCDIR=src
 
@@ -7,21 +7,19 @@ OBJ=$(SRC:.c=.o)
 
 #INCLUDE=$(wildcard include/*.h)
 
-EXEC=snake01
+TGT=SnakeAlpha
 
 ####MAKE#####
-all: $(EXEC)
+all: $(TGT)
 
-$(EXEC): $(OBJ)
+$(TGT): $(OBJ)
 	@echo ************************
-	@echo 	GET READY 4 $@
+	@echo GET READY 4 $@
 	@echo ************************
-	@$(COMPIL) $@ $^
+	@$(CC) -o $(TGT) $(OBJ)
 	@echo ------------------
-	@echo 	10DI LEK
+	@echo 10DI LEK
 	@echo ------------------
-
-$(OBJ): $(SRC)
-		@$(MAKE) -C $(SRCDIR) -s all	
-
-.PHONY: clean 
+	
+clean:
+	@del *.o *~

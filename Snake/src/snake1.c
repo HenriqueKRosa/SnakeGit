@@ -1,10 +1,14 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "include/CobraBib.h"
-#include "include/MenuBib.h"
 #include <string.h>
+#include <conio.h>
+#include "../include/CobraBib.h"
+#include "../include/NivelBib.h"
+#include "../include/PlayerBib.h"
+#include "../include/MenuBib.h"
 int nivelId;
 char nivel[500];
+int colunas;
 
 int main()
 {

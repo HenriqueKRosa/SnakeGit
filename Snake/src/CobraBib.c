@@ -1,11 +1,15 @@
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
-#include "include/CobraBib.h"
-#include "include/NivelBib.h"
+#include <conio.h>
+#include "../include/CobraBib.h"
+#include "../include/NivelBib.h"
+#include "../include/PlayerBib.h"
+#include "../include/MenuBib.h"
 #include <stdlib.h>
 extern char nivel[500];
 extern int nivelId;
+extern int colunas;
 
 char LeComando()
 {
@@ -19,9 +23,7 @@ char LeComando()
 
 int Movimentacao(Cobra *head)
 {
-	int quit = 0, colunas, i;
-
-	colunas = GeraNumColunas(nivelId);
+	int quit = 0;
 
 	switch (LeComando()) {
 		case 'W':
