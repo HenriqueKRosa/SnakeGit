@@ -11,5 +11,5 @@ void LeComando(char *comando);
 int Movimentacao(Cobra *head, char *comando);
 void DeletaCobra(Cobra *head);
 void CriaNovaCobra(Cobra *head);
-void IniciaCobra(Cobra *head);
+void AumentaCobra(Cobra *head);
 #endif

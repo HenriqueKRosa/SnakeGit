@@ -112,24 +112,7 @@ int ImprimeMapa(Cobra *head, char comando)
 				{
 					if (condutor == head)
 					{
-						switch(comando)
-						{
-							case 'W':
-								putch('V');
-								break;
-							case 'S':
-								putch('^');
-								break;
-							case 'D':
-								putch('<');
-								break;
-							case 'A':
-								putch('>');
-								break;
-							case 'I':
-								putch('O');
-								break;
-						}
+						ImprimeCabeca(comando);
 						isSnake = 1;
 					}
 					else if(isSnake != 1)
@@ -145,11 +128,11 @@ int ImprimeMapa(Cobra *head, char comando)
 				}
 				condutor = condutor->next;
 			}
-			if((index == head->pos) && (nivel[index] == '#'))
+			if((index == head->pos) && (nivel[index] == '#')) //Verifica se houve colisão com a parede.
 			{
 				isGameOver = 1;
 			}
-			if(isSnake == 0)
+			if(isSnake == 0) //Caso não seja Snake, imprime o caracter do mapa.
 			{
 				printf("%c", nivel[index]);
 			}
@@ -162,6 +145,28 @@ int ImprimeMapa(Cobra *head, char comando)
 		}
 	}
 	return isGameOver;
+}
+
+void ImprimeCabeca(char comando)
+{
+	switch(comando)
+	{
+		case 'W':
+		putch('V');
+		break;
+		case 'S':
+		putch('^');
+		break;
+		case 'D':
+		putch('<');
+		break;
+		case 'A':
+		putch('>');
+		break;
+		case 'I':
+		putch('O');
+		break;
+	}
 }
 
 void Print_Map(char Map_Name[20])
