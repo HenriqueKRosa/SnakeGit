@@ -103,7 +103,7 @@ int ImprimeMapa(Cobra *head)
 	{
 		for(i = 0; i < colunas; i++)
 		{
-			while(condutor->next != NULL)
+			while(condutor != NULL)
 			{
 				isPosOfSnake = (index == condutor->pos);
 				isNotWall = (nivel[index] != '#');

@@ -12,6 +12,38 @@ int colunas;
 
 int main()
 {
+	int isGameOver = 0, quit = 0;
+	Cobra *head, *cobra1, *cobra2;
+	
+	head = malloc(sizeof(Cobra));
+	cobra1 = malloc(sizeof(Cobra));
+	cobra2 = malloc(sizeof(Cobra));
+	
+	head->pos = 55; //Cabeça
+	head->next = cobra1;
+	
+	cobra1->pos = 0; //p1 corpo
+	cobra1->next = cobra2;
+	
+	cobra2->pos = 0; //p2 corpo
+	cobra2->next = NULL;
+	
+	CarregaNivel();
+	ImprimeMapa(head);
+	
+	do
+	{
+		quit = Movimentacao(head);
+		system("cls");
+		isGameOver = ImprimeMapa(head);
+	}while((isGameOver != 1) && (quit != 1));
+	puts("Game over");
+	getch();
+	return 0;
+}
+
+int main2()
+{
 		int op;
 			
 		Inicio:

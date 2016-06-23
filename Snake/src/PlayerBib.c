@@ -19,6 +19,7 @@ void GetPlayerName(Player* AAA)
 	}while(strlen(nomeTemp) > 20);
 	strcpy(AAA->nome, nomeTemp);
 }
+/*
 void Save_Score (Player jogador)
 {
     int cont = 0;
@@ -55,4 +56,4 @@ void Save_Score (Player jogador)
     }
     fclose(scoreboard);
     fclose(scoreboardTemp);
-}
+}*/

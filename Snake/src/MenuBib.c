@@ -84,22 +84,19 @@ return Option_Number;
 
 void Jogo()
 {
-		int isGameOver = 0, quit = 0;
-	Cobra *head, *cobra1, *cobra2, *cobra3;
+	int isGameOver = 0, quit = 0;
+	Cobra *head, *cobra1, *cobra2;
 	
 	head = malloc(sizeof(Cobra));
 	cobra1 = malloc(sizeof(Cobra));
 	cobra2 = malloc(sizeof(Cobra));
-	cobra3 = malloc(sizeof(Cobra));
 	
 	head->pos = 55;
 	head->next = cobra1;
 	cobra1->pos = 0;
 	cobra1->next = cobra2;
 	cobra2->pos = 0;
-	cobra2->next = cobra3;
-	cobra3->pos = 0;
-	cobra3->next = NULL;
+	cobra2->next = NULL;
 	
 	CarregaNivel();
 	ImprimeMapa(head);
