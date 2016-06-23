@@ -91,7 +91,7 @@ void CarregaNivel() //Carrega um nível a partir do valor da var global nivelId.
 	}
 }
 
-int ImprimeMapa(Cobra *head)
+int ImprimeMapa(Cobra *head, char comando)
 {
 	int index = 0, isSnake = 0, isGameOver = 0, i;
 	int isPosOfSnake, isNotWall;
@@ -112,7 +112,24 @@ int ImprimeMapa(Cobra *head)
 				{
 					if (condutor == head)
 					{
-						printf("@");
+						switch(comando)
+						{
+							case 'W':
+								putch('V');
+								break;
+							case 'S':
+								putch('^');
+								break;
+							case 'D':
+								putch('<');
+								break;
+							case 'A':
+								putch('>');
+								break;
+							case 'I':
+								putch('O');
+								break;
+						}
 						isSnake = 1;
 					}
 					else if(isSnake != 1)

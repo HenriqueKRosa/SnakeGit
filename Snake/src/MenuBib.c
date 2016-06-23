@@ -85,6 +85,7 @@ return Option_Number;
 void Jogo()
 {
 	int isGameOver = 0, quit = 0;
+	char comando = 'I';
 	Cobra *head, *cobra1, *cobra2;
 	
 	head = malloc(sizeof(Cobra));
@@ -99,13 +100,13 @@ void Jogo()
 	cobra2->next = NULL;
 	
 	CarregaNivel();
-	ImprimeMapa(head);
+	ImprimeMapa(head, comando);
 	
 	do
 	{
-		quit = Movimentacao(head);
+		quit = Movimentacao(head, &comando);
 		system("cls");
-		isGameOver = ImprimeMapa(head);
+		isGameOver = ImprimeMapa(head, comando);
 	}while((isGameOver != 1) && (quit != 1));
 	puts("Game over");
 }

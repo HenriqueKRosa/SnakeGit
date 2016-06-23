@@ -7,8 +7,8 @@ typedef struct str_Cobra
 	//int hasFood;
 	struct str_Cobra *next;
 } Cobra;
-char LeComando();
-int Movimentacao(Cobra *head);
+void LeComando(char *comando);
+int Movimentacao(Cobra *head, char *comando);
 void DeletaCobra(Cobra *head);
 void CriaNovaCobra(Cobra *head);
 void IniciaCobra(Cobra *head);

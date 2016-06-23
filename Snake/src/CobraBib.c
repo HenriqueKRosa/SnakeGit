@@ -11,21 +11,18 @@ extern char nivel[500];
 extern int nivelId;
 extern int colunas;
 
-char LeComando()
+void LeComando(char *comando)
 {
-	char comando;
-
-	comando = getch();
-	comando = toupper(comando);
-
-	return comando;
+	*comando = getch();
+	*comando = toupper(*comando);
 }
 
-int Movimentacao(Cobra *head)
+int Movimentacao(Cobra *head, char *comando)
 {
 	int quit = 0;
 
-	switch (LeComando()) {
+	LeComando(comando);
+	switch (*comando) {
 		case 'W':
 			DeletaCobra(head);
 			CriaNovaCobra(head);
