@@ -9,4 +9,5 @@ typedef struct Jogador
 	int vidas;
 } Player;
 void GetPlayerName(Player* AAA);
+void Save_Score (Player jogador);
 #endif
