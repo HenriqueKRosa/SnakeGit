@@ -8,6 +8,7 @@
 #include <conio.h>
 #include <stdlib.h>
 extern int nivelId;
+extern int colunas;
 
 void Print_Title(){
     printf("############################################################\n");
@@ -107,6 +108,7 @@ void Jogo()
 		quit = Movimentacao(head, &comando);
 		system("cls");
 		isGameOver = ImprimeMapa(head, comando);
+		printf("%d\n", colunas);
 	}while((isGameOver != 1) && (quit != 1));
 	puts("Game over");
 }
@@ -125,26 +127,30 @@ void WSControl(int Min_Option_Num, int Max_Option_Num, char* Users_Input, int* S
         *Stage_Number = *Stage_Number + 1;
 }
 
-void Stage_selection()
+int Stage_selection()
 {
-    int Stage_Number = 1;
+    int Stage_Number = 0;
     char Users_Input;
 
 do
 {
     system("cls");
     printf("\n\n");
+	Create_Menu_Option("Nivel teste\n", 0, &Stage_Number);
     Create_Menu_Option("Nivel 1\n", 1, &Stage_Number);
-    Create_Menu_Option("Nivel teste\n", 2, &Stage_Number);
+	Create_Menu_Option("Nivel 2\n", 2, &Stage_Number);
     Create_Menu_Option("Menu principal\n", 3, &Stage_Number);
     printf("\n");
     switch(Stage_Number)
     {
+		case 0: Print_Map("test.txt"); break;
         case 1: Print_Map("1.txt"); break;
-        case 2: Print_Map("test.txt"); break;
+        case 2: Print_Map("2.txt"); break;
     }
-    WSControl(1, 3, &Users_Input, &Stage_Number);
+    WSControl(0, 3, &Users_Input, &Stage_Number);
 }while(Users_Input != 13);
+
+return Stage_Number;
 }
 void Show_Scoreboard ()
 {

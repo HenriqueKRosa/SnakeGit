@@ -70,18 +70,18 @@ void CarregaNivel() //Carrega um nível a partir do valor da var global nivelId.
 
 	else if(nivelId == 1)
 	{
-	 	if((mapaArqv = fopen("../maps/1.txt", "r")) == NULL)
+	 	if((mapaArqv = fopen("maps/1.txt", "r")) == NULL)
 			perror("NAO VAI DA NAO");
 		else
 		{
-		GetLinECol(&linhas, mapaArqv);
-		makeMapa(mapaArqv, linhas, nivel);
+			GetLinECol(&linhas, mapaArqv);
+			makeMapa(mapaArqv, linhas, nivel);
 		}
 	}
 	
 	else if(nivelId == 2)
 	{
-	 	if((mapaArqv = fopen("../maps/2.txt", "r")) == NULL)
+	 	if((mapaArqv = fopen("maps/2.txt", "r")) == NULL)
 			perror("NAO VAI DA NAO");
 		else
 		{

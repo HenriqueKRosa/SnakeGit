@@ -6,11 +6,11 @@
 #include "../include/NivelBib.h"
 #include "../include/PlayerBib.h"
 #include "../include/MenuBib.h"
-int nivelId = 0;
+int nivelId = 1;
 char nivel[500];
-int colunas;
+int colunas = 0;
 
-int main()
+int main1()
 {
 	int isGameOver = 0, quit = 0;
 	char comando = 'I';
@@ -41,14 +41,15 @@ int main()
 	return 0;
 }
 
-int main2()
+int main()
 {
-		int op;
+		int op, op1;
 			
 		Inicio:
 		Print_Title();
 		op = Menu();
 		
+		Opcao:
 		switch(op)
 		{
 				case 1:
@@ -59,7 +60,28 @@ int main2()
 					goto Inicio;
 					break;
 				case 2:
-					Stage_selection();
+					op1 = Stage_selection();
+					switch(op1)
+					{
+						case 0:
+							nivelId = 0;
+							op = 1;
+							goto Opcao;
+							break;
+						case 1:
+							nivelId = 1;
+							op = 1;
+							goto Opcao;
+							break;
+						case 2:
+							nivelId = 2;
+							op = 1;
+							goto Opcao;
+							break;
+						case 3:
+							goto Inicio;
+							break;
+					}
 					break;
 				case 3:
 					puts("Nao implementado ainda!");
@@ -69,7 +91,4 @@ int main2()
 				case 4:
 					return 0;
 		}
-		
-		getch();
-		return 0;
 }
