@@ -11,13 +11,13 @@ extern char nivel[500];
 extern int nivelId;
 extern int colunas;
 
-void LeComando(char *comando)
+void LeComando(char *comando) //Lê o comando e o padroniza
 {
 	*comando = getch();
 	*comando = toupper(*comando);
 }
 
-int Movimentacao(Cobra *head, char *comando)
+int Movimentacao(Cobra *head, char *comando) //Move de acordo com o comando.
 {
 	int quit = 0;
 
@@ -59,7 +59,7 @@ int Movimentacao(Cobra *head, char *comando)
 	return quit;
 }
 
-void CriaNovaCobra(Cobra *head)
+void CriaNovaCobra(Cobra *head) //Cria um novo pedaço de snake e o coloca na mesma posição da cabeça.
 {
 	Cobra *nova;
 
@@ -69,7 +69,7 @@ void CriaNovaCobra(Cobra *head)
 	head->next = nova;
 }
 
-void AumentaCobra(Cobra *head)
+void AumentaCobra(Cobra *head) //Quase o mesmo que a função acima, porém a posição do novo pedaço fica na posição 0 para evitar conflitos
 {
 	Cobra *nova;
 	
@@ -79,7 +79,7 @@ void AumentaCobra(Cobra *head)
 	head->next = nova;
 }
 
-void DeletaCobra(Cobra *head)
+void DeletaCobra(Cobra *head) //Deleta o último elemento da lista de Cobra
 {
 	Cobra *tmp;
 
@@ -91,5 +91,4 @@ void DeletaCobra(Cobra *head)
 	}
 	free(tmp->next);
 	tmp->next = NULL;
-	
 }

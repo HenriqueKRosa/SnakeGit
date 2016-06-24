@@ -98,7 +98,7 @@ int CarregaNivel() //Carrega um nível a partir do valor da var global nivelId.
 	return init;
 }
 
-int ImprimeMapa(Cobra *head, char comando)
+int ImprimeMapa(Cobra *head, char comando) //Imprime o mapa e retorna se o jogador tomou game over
 {
 	int index = 0, isSnake = 0, isGameOver = 0, i;
 	int isPosOfSnake, isNotWall;
@@ -106,31 +106,31 @@ int ImprimeMapa(Cobra *head, char comando)
 
 	condutor = head;
 
-	while(nivel[index] != '\0')
+	while(nivel[index] != '\0') //Gera pseudo-matriz a partir da string do nivel
 	{
 		for(i = 0; i < colunas; i++)
 		{
-			while(condutor != NULL)
+			while(condutor != NULL) //Percorre a lista de Cobra.
 			{
 				isPosOfSnake = (index == condutor->pos);
 				isNotWall = (nivel[index] != '#');
 
 				if(isPosOfSnake && isNotWall)
 				{
-					if (condutor == head)
+					if (condutor == head) //Se é a cabeça, imprime ela ué
 					{
 						ImprimeCabeca(comando);
 						isSnake = 1;
 					}
-					else if(isSnake != 1)
+					else if(isSnake != 1) //Caso contrário imprime o corpo (tem que melhorar e botar no modelo da especificação)
 					{
 						printf("*");
 						isSnake = 1;
 					}
 				}
-				else if (condutor != head)
+				else if (condutor != head) //Se a parte do corpo não é a cabeça
 				{
-					if((head->pos == condutor->pos) && (condutor != head->next))
+					if(head->pos == condutor->pos) //Se a cabeça bateu no corpo dá game over
 						isGameOver = 1;
 				}
 				condutor = condutor->next;

@@ -41,7 +41,7 @@ int main2()
 	return 0;
 }
 
-int main()
+int main() //Jogo temporário
 {
 		int op, op1, win;
 			

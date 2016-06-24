@@ -26,8 +26,8 @@ void Print_Title(){
     printf("############################################################\n\n");
 }
 
-void Create_Menu_Option(char Option_Text[20], int Menu_Number, int* Option_Number){
-
+void Create_Menu_Option(char Option_Text[20], int Menu_Number, int* Option_Number) //Cria botão no menu.
+{
     int i;
 
     for(i=0;i<4;i++)
@@ -54,8 +54,8 @@ void Create_Menu_Option(char Option_Text[20], int Menu_Number, int* Option_Numbe
     }
 }
 
-int Menu() {
-
+int Menu() //Função que cuida dos botões do menu e retorna a opção escolhida
+{
     int Option_Number;
     char Users_Input;
 
@@ -84,7 +84,7 @@ int Menu() {
 return Option_Number;
 }
 
-int Jogo()
+int Jogo() //Função que cria a "sessão de jogo" e une as outras funções para fazer o jogo funcionar.
 {
 	int isGameOver = 0, quit = 0, init, win = 0;
 	char comando;
@@ -127,7 +127,7 @@ int Jogo()
 	return win;
 }
 
-void GUI(Player AAA)
+void GUI(Player AAA) //Exibe na tela in-game com os dados do jogador.
 {
 	printf("ID: %20s Pontos: %5d Ratos: %5d/15 Vidas: %5d\n", AAA.nome, AAA.pontos, AAA.ratos, AAA.vidas);
 }
@@ -141,31 +141,32 @@ void WSControl(int Min_Option_Num, int Max_Option_Num, char* Users_Input, int* S
         *Stage_Number = *Stage_Number + 1;
 }
 
-int Stage_selection()
+int Stage_selection() //Retorna o número do nivel a ser carregado.
 {
     int Stage_Number = 0;
     char Users_Input;
 
-do
-{
-    system("cls");
-    printf("\n\n");
-	Create_Menu_Option("Nivel teste\n", 0, &Stage_Number);
-    Create_Menu_Option("Nivel 1\n", 1, &Stage_Number);
-	Create_Menu_Option("Nivel 2\n", 2, &Stage_Number);
-    Create_Menu_Option("Menu principal\n", 3, &Stage_Number);
-    printf("\n");
-    switch(Stage_Number)
-    {
-		case 0: Print_Map("test.txt"); break;
-        case 1: Print_Map("1.txt"); break;
-        case 2: Print_Map("2.txt"); break;
-    }
-    WSControl(0, 3, &Users_Input, &Stage_Number);
-}while(Users_Input != 13);
+	do
+	{
+		system("cls");
+		printf("\n\n");
+		Create_Menu_Option("Nivel teste\n", 0, &Stage_Number);
+		Create_Menu_Option("Nivel 1\n", 1, &Stage_Number);
+		Create_Menu_Option("Nivel 2\n", 2, &Stage_Number);
+		Create_Menu_Option("Menu principal\n", 3, &Stage_Number);
+		printf("\n");
+		switch(Stage_Number)
+		{
+			case 0: Print_Map("test.txt"); break;
+			case 1: Print_Map("1.txt"); break;
+			case 2: Print_Map("2.txt"); break;
+		}
+		WSControl(0, 3, &Users_Input, &Stage_Number);
+	}while(Users_Input != 13);
 
-return Stage_Number;
+	return Stage_Number;
 }
+
 void Show_Scoreboard ()
 {
     char User_Input;
@@ -176,12 +177,13 @@ void Show_Scoreboard ()
         User_Input = getch();
     }
 }
+
 void Imprime_Jogadores()
 {
     FILE* jogadores;
     Player jogador;
     int i;
-    jogadores = fopen("scoreboard.bin", "rb");
+    jogadores = fopen("highscores/scoreboard.bin", "rb");
     for(i=1;i<=15;i++)
     {
         printf(" %d. ", i);

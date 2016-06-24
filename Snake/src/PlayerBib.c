@@ -7,7 +7,7 @@
 #include "../include/NivelBib.h"
 #include <stdlib.h>
 
-void GetPlayerName(Player* AAA)
+void GetPlayerName(Player* AAA) //Pega o Id do Jogador e adequa ao padrão do jogo.
 {
 	char nomeTemp[20];
 	
