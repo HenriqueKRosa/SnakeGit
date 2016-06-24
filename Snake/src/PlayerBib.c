@@ -6,6 +6,7 @@
 #include "../include/MenuBib.h"
 #include "../include/NivelBib.h"
 #include <stdlib.h>
+#include <limits.h>
 
 void GetPlayerName(Player* AAA) //Pega o Id do Jogador e adequa ao padrão do jogo.
 {
@@ -20,16 +21,17 @@ void GetPlayerName(Player* AAA) //Pega o Id do Jogador e adequa ao padrão do jo
 	strcpy(AAA->nome, nomeTemp);
 	system("cls");
 }
-/*
+
 void Save_Score (Player jogador)
 {
     int cont = 0;
     int i, j;
-    FILE* scoreboard, scoreboardTemp;
+    FILE* scoreboard;
+	FILE* scoreboardTemp;
     Player jogadorTemp;
     jogadorTemp.pontos = INT_MAX;
-    scoreboard = fopen("scoreboard.bin", "rb+");
-    scoreboardTemp = fopen("scoreboardTemp.bin", "wb+");
+    scoreboard = fopen("highscores/scoreboard.bin", "rb+");
+    scoreboardTemp = fopen("highscores/scoreboardTemp.bin", "wb+");
     while((jogadorTemp.pontos > jogador.pontos) && (cont < 15))
     {
         cont++;
@@ -57,4 +59,4 @@ void Save_Score (Player jogador)
     }
     fclose(scoreboard);
     fclose(scoreboardTemp);
-}*/
+}
