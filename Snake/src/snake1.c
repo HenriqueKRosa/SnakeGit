@@ -43,7 +43,7 @@ int main2()
 
 int main()
 {
-		int op, op1;
+		int op, op1, win;
 			
 		Inicio:
 		Print_Title();
@@ -54,7 +54,12 @@ int main()
 		{
 				case 1:
 					system("cls");
-					Jogo();
+					win = Jogo();
+					if(win == 1)
+					{
+						nivelId++;
+						goto Opcao;
+					}
 					puts("Press any key to return to main menu.");
 					getch();
 					goto Inicio;

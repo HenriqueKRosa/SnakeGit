@@ -52,6 +52,9 @@ int Movimentacao(Cobra *head, char *comando)
 		case 'Q':
 			quit = 1;
 			break;
+		case 'M':
+			quit = 2;
+			break;
 	}
 	return quit;
 }

@@ -18,6 +18,7 @@ void GetPlayerName(Player* AAA)
 			puts("Name too long! Try again.");
 	}while(strlen(nomeTemp) > 20);
 	strcpy(AAA->nome, nomeTemp);
+	system("cls");
 }
 /*
 void Save_Score (Player jogador)

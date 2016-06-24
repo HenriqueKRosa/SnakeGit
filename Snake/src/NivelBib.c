@@ -159,20 +159,20 @@ void ImprimeCabeca(char comando)
 	switch(comando)
 	{
 		case 'W':
-		putch('V');
-		break;
+			putch('V');
+			break;
 		case 'S':
-		putch('^');
-		break;
+			putch('^');
+			break;
 		case 'D':
-		putch('<');
-		break;
+			putch('<');
+			break;
 		case 'A':
-		putch('>');
-		break;
-		case 'I':
-		putch('O');
-		break;
+			putch('>');
+			break;
+		default:
+			putch('O');
+			break;
 	}
 }
 

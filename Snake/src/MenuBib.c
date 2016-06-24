@@ -84,11 +84,14 @@ int Menu() {
 return Option_Number;
 }
 
-void Jogo()
+int Jogo()
 {
-	int isGameOver = 0, quit = 0, init;
-	char comando = 'I';
+	int isGameOver = 0, quit = 0, init, win = 0;
+	char comando;
 	Cobra *head, *cobra1, *cobra2;
+	Player AAA;
+	
+	GetPlayerName(&AAA);
 	
 	head = malloc(sizeof(Cobra));
 	cobra1 = malloc(sizeof(Cobra));
@@ -103,21 +106,30 @@ void Jogo()
 	cobra2->pos = 0;
 	cobra2->next = NULL;
 
+	AAA.pontos = 15;
+	AAA.ratos = 2;
+	AAA.vidas = 1;
+	
+	GUI(AAA);
 	ImprimeMapa(head, comando);
 	nivel[init] = ' ';
 	do
 	{
 		quit = Movimentacao(head, &comando);
+		if(quit == 2)
+			win = 1;
 		system("cls");
+		GUI(AAA);
 		isGameOver = ImprimeMapa(head, comando);
-	}while((isGameOver != 1) && (quit != 1));
+	}while((isGameOver != 1) && (quit == 0) && (win != 1));
 	memset(nivel, 0, sizeof(nivel));
 	puts("Game over");
+	return win;
 }
 
 void GUI(Player AAA)
 {
-	printf("ID: %20s Pontos: %5d Ratos: %5d/15 Vidas: %5d", AAA.nome, AAA.pontos, AAA.ratos, AAA.vidas);
+	printf("ID: %20s Pontos: %5d Ratos: %5d/15 Vidas: %5d\n", AAA.nome, AAA.pontos, AAA.ratos, AAA.vidas);
 }
 
 void WSControl(int Min_Option_Num, int Max_Option_Num, char* Users_Input, int* Stage_Number)
