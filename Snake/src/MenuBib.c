@@ -9,6 +9,7 @@
 #include <stdlib.h>
 extern int nivelId;
 extern int colunas;
+extern char nivel[500];
 
 void Print_Title(){
     printf("############################################################\n");
@@ -85,7 +86,7 @@ return Option_Number;
 
 void Jogo()
 {
-	int isGameOver = 0, quit = 0;
+	int isGameOver = 0, quit = 0, init;
 	char comando = 'I';
 	Cobra *head, *cobra1, *cobra2;
 	
@@ -93,22 +94,24 @@ void Jogo()
 	cobra1 = malloc(sizeof(Cobra));
 	cobra2 = malloc(sizeof(Cobra));
 	
-	head->pos = CarregaNivel();
+	init = CarregaNivel();
+	
+	head->pos = init;
 	head->next = cobra1;
 	cobra1->pos = 0;
 	cobra1->next = cobra2;
 	cobra2->pos = 0;
 	cobra2->next = NULL;
-	
+
 	ImprimeMapa(head, comando);
-	
+	nivel[init] = ' ';
 	do
 	{
 		quit = Movimentacao(head, &comando);
 		system("cls");
 		isGameOver = ImprimeMapa(head, comando);
-		printf("%d\n", colunas);
 	}while((isGameOver != 1) && (quit != 1));
+	memset(nivel, 0, sizeof(nivel));
 	puts("Game over");
 }
 

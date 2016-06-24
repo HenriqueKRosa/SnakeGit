@@ -56,7 +56,6 @@ int main()
 					system("cls");
 					Jogo();
 					puts("Press any key to return to main menu.");
-					memset(nivel, 0, sizeof(nivel));
 					getch();
 					goto Inicio;
 					break;

@@ -24,38 +24,38 @@ void GetLinECol(int *linhas, FILE *mapaArqv) //Lê do arquivo o número de linha
 	colunas = atoi(infos);
 }
 
-int strcpy2(char *dest, int pos, char *src) //Copia uma string pra dentro de outra a partir da posição "pos".
+void strcpy2(char *dest, int pos, char *src, int *init) //Copia uma string pra dentro de outra a partir da posição "pos".
 {
-		int i = 0, init;
+		int i = 0;
 		
 		do
 		{
 			dest[pos+i] = src[i];
 			if(src[i] == 'O')
-				init = i;
+			{
+				*init = pos+i;
+			}
 			i++;
 		}while( src[i] != '\0' );
-		return init;
 }
 
-int makeMapa(FILE *mapaArqv, int linhas, char *nivel) //Carrega o mapa "matriz" numa string.
+void makeMapa(FILE *mapaArqv, int linhas, char *nivel, int *init) //Carrega o mapa "matriz" numa string.
 {
 	char linha[colunas];
 	int pos = 0;
-	int i, init;
+	int i;
 	
 	fseek(mapaArqv, 8, SEEK_SET);
 	for(i = 0; i < linhas; i++)
 	{
 		fgets(linha, colunas+1, mapaArqv);
-		init = strcpy2(nivel, pos, linha);
+		strcpy2(nivel, pos, linha, init);
 		fseek(mapaArqv, 2, SEEK_CUR);
 		pos += colunas;
 		if(i == linhas)
 			nivel[pos+1] = '\0';
 	}
 	fclose(mapaArqv);
-	return init;
 }
 
 int CarregaNivel() //Carrega um nível a partir do valor da var global nivelId.
@@ -70,7 +70,7 @@ int CarregaNivel() //Carrega um nível a partir do valor da var global nivelId.
 		else
 		{
 			GetLinECol(&linhas, mapaArqv);
-			init = makeMapa(mapaArqv, linhas, nivel);
+			makeMapa(mapaArqv, linhas, nivel, &init);
 		}
 	}
 
@@ -81,7 +81,7 @@ int CarregaNivel() //Carrega um nível a partir do valor da var global nivelId.
 		else
 		{
 			GetLinECol(&linhas, mapaArqv);
-			init = makeMapa(mapaArqv, linhas, nivel);
+			makeMapa(mapaArqv, linhas, nivel, &init);
 		}
 	}
 	
@@ -92,7 +92,7 @@ int CarregaNivel() //Carrega um nível a partir do valor da var global nivelId.
 		else
 		{
 			GetLinECol(&linhas, mapaArqv);
-			init = makeMapa(mapaArqv, linhas, nivel);
+			makeMapa(mapaArqv, linhas, nivel, &init);
 		}
 	}
 	return init;
