@@ -93,14 +93,13 @@ void Jogo()
 	cobra1 = malloc(sizeof(Cobra));
 	cobra2 = malloc(sizeof(Cobra));
 	
-	head->pos = 55;
+	head->pos = CarregaNivel();
 	head->next = cobra1;
 	cobra1->pos = 0;
 	cobra1->next = cobra2;
 	cobra2->pos = 0;
 	cobra2->next = NULL;
 	
-	CarregaNivel();
 	ImprimeMapa(head, comando);
 	
 	do

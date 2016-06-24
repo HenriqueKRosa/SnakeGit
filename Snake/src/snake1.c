@@ -10,7 +10,7 @@ int nivelId = 1;
 char nivel[500];
 int colunas = 0;
 
-int main1()
+int main2()
 {
 	int isGameOver = 0, quit = 0;
 	char comando = 'I';
@@ -56,6 +56,7 @@ int main()
 					system("cls");
 					Jogo();
 					puts("Press any key to return to main menu.");
+					memset(nivel, 0, sizeof(nivel));
 					getch();
 					goto Inicio;
 					break;
