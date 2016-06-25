@@ -26,25 +26,21 @@ int Movimentacao(Cobra *head, char *comando) //Move de acordo com o comando.
 		case 'W':
 			DeletaCobra(head);
 			CriaNovaCobra(head);
-			//PassFood(head);
 			head->pos = head->pos - colunas;
 			break;
 		case 'S':
 			DeletaCobra(head);
 			CriaNovaCobra(head);
-			//PassFood(head);
 			head->pos = head->pos + colunas;
 			break;
 		case 'A':
 			DeletaCobra(head);
 			CriaNovaCobra(head);
-			//PassFood(head);
 			head->pos = head->pos - 1;
 			break;
 		case 'D':
 			DeletaCobra(head);
 			CriaNovaCobra(head);
-			//PassFood(head);
 			head->pos = head->pos + 1;
 			break;
 		case '+':

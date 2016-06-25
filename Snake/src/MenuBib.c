@@ -86,12 +86,10 @@ return Option_Number;
 
 int Jogo() //Função que cria a "sessão de jogo" e une as outras funções para fazer o jogo funcionar.
 {
-	int isGameOver = 0, quit = 0, init, win = 0, tam;
+	int isGameOver = 0, quit = 0, init, win = 0, tam, ratos, vidas;
 	char comando;
 	Cobra *head, *cobra1, *cobra2;
 	Player AAA;
-	
-	GetPlayerName(&AAA);
 	
 	head = malloc(sizeof(Cobra));
 	cobra1 = malloc(sizeof(Cobra));
@@ -110,10 +108,10 @@ int Jogo() //Função que cria a "sessão de jogo" e une as outras funções par
 	cobra2->next = NULL;
 
 	AAA.pontos = 15;
-	AAA.ratos = 2;
-	AAA.vidas = 1;
+	ratos = 2;
+	vidas = 1;
 	
-	GUI(AAA);
+	GUI(AAA, vidas, ratos);
 	ImprimeMapa(head, comando);
 	nivel[init] = ' ';
 	do
@@ -122,7 +120,7 @@ int Jogo() //Função que cria a "sessão de jogo" e une as outras funções par
 		if(quit == 2)
 			win = 1;
 		system("cls");
-		GUI(AAA);
+		GUI(AAA, vidas, ratos);
 		isGameOver = ImprimeMapa(head, comando);
 		tam = GetCobraSize(head);
 	}while((isGameOver != 1) && (quit == 0) && (win != 1) && (tam >= 3));
@@ -132,9 +130,9 @@ int Jogo() //Função que cria a "sessão de jogo" e une as outras funções par
 	return win;
 }
 
-void GUI(Player AAA) //Exibe na tela in-game com os dados do jogador.
+void GUI(Player AAA, int vidas, int ratos) //Exibe na tela in-game com os dados do jogador.
 {
-	printf("ID: %20s Pontos: %5d Ratos: %5d/15 Vidas: %5d\n", AAA.nome, AAA.pontos, AAA.ratos, AAA.vidas);
+	printf("Nível: %d Ratos: %d/15 Vidas: %d\n", nivelId, AAA.pontos, ratos, vidas);
 }
 
 void WSControl(int Min_Option_Num, int Max_Option_Num, char* Users_Input, int* Stage_Number)

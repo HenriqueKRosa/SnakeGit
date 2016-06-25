@@ -7,6 +7,7 @@
 #include "../include/NivelBib.h"
 #include <stdlib.h>
 #include <limits.h>
+extern int nivelId;
 
 void GetPlayerName(Player* AAA) //Pega o Id do Jogador e adequa ao padrão do jogo.
 {
@@ -59,4 +60,9 @@ void Save_Score (Player jogador)
     }
     fclose(scoreboard);
     fclose(scoreboardTemp);
+}
+
+void AddScore(Player *AAA)
+{
+	AAA->pontos =+ nivelId;	
 }
