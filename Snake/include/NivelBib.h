@@ -8,4 +8,6 @@ void makeMapa(FILE *mapaArqv, int linhas, char *nivel, int *init);
 int CarregaNivel();
 void ImprimeCabeca(char comando);
 int ImprimeMapa(Cobra *head, char comando);
+void PosicoesLivres(Cobra* condutor, int* PosLivres, int* PosOcupadas, int NPosOcupadas);
+int IsKPosDoArray(int k, int* ArrayDePosições, int TamanhoArray);
 #endif
