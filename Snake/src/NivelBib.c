@@ -195,3 +195,35 @@ void Print_Map(char Map_Name[20])
 	}
 	fclose(Map_File);
 }
+void PosicoesLivres(Cobra* condutor, int* PosLivres)                 //Preenche array com as posições livres no mapa.
+{
+    int PosDaCobra[500], cont = 0, k = 0, j = 0, TamanhoCobra;
+while(condutor != NULL)
+{
+    PosDaCobra[cont] = condutor->pos;
+    condutor = condutor->next; //Vai pro próximo elemento da lista
+    cont++;
+}
+TamanhoCobra = cont;
+while(nivel[k] != '\0')
+{
+    if(nivel[k] == ' ' && !(IsKPosDaCobra(k, PosDaCobra, TamanhoCobra)))
+    {
+        PosLivres[j] = k;
+        j++;
+    }
+    k++;
+}
+}
+int IsKPosDaCobra (int k, int* PosDaCobra, int TamanhoCobra)         //Verifica se um número K é alguma posição da cobra.
+{
+    int i, boolean = 0;
+    for(i = 0; i < TamanhoCobra; i++)
+    {
+        if(k == PosDaCobra[i])
+        {
+            boolean = 1;
+        }
+    }
+    return boolean;
+}
