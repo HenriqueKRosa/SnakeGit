@@ -1,8 +1,8 @@
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
-#include "../include/CobraBib.h"
 #include "../include/PlayerBib.h"
+#include "../include/CobraBib.h"
 #include "../include/NivelBib.h"
 #include "../include/MenuBib.h"
 #include <conio.h>
@@ -86,8 +86,8 @@ return Option_Number;
 
 int Jogo() //Função que cria a "sessão de jogo" e une as outras funções para fazer o jogo funcionar.
 {
-	int isGameOver = 0, quit = 0, init, win = 0, tam, ratos, vidas;
-	char comando;
+	int /*isGameOver = 0,*/ quit = 0, init, win = 0, tam, ratos, vidas;
+	char comando = 'I';
 	Cobra *head, *cobra1, *cobra2;
 	Player AAA;
 	
@@ -108,31 +108,32 @@ int Jogo() //Função que cria a "sessão de jogo" e une as outras funções par
 	cobra2->next = NULL;
 
 	AAA.pontos = 15;
-	ratos = 2;
-	vidas = 1;
+	/*ratos = 2;
+	vidas = 1;*/
 	
 	GUI(AAA, vidas, ratos);
 	ImprimeMapa(head, comando);
 	nivel[init] = ' ';
 	do
 	{
-		quit = Movimentacao(head, &comando);
+		quit = RepeteComando(head, &comando, AAA);
 		if(quit == 2)
 			win = 1;
-		system("cls");
+		/*system("cls");
 		GUI(AAA, vidas, ratos);
-		isGameOver = ImprimeMapa(head, comando);
+		isGameOver = ImprimeMapa(head, comando);*/
 		tam = GetCobraSize(head);
-	}while((isGameOver != 1) && (quit == 0) && (win != 1) && (tam >= 3));
+	}while(/*(isGameOver != 1) && */(quit == 0) && (win != 1) && (tam >= 3));
 
 	memset(nivel, 0, sizeof(nivel));
 	puts("Game over");
+	GetPlayerName(&AAA);
 	return win;
 }
 
 void GUI(Player AAA, int vidas, int ratos) //Exibe na tela in-game com os dados do jogador.
 {
-	printf("Nível: %d Ratos: %d/15 Vidas: %d\n", nivelId, AAA.pontos, ratos, vidas);
+	printf("Nivel: %d Ratos: %d/15 Vidas: %d\n", nivelId, AAA.pontos, ratos, vidas);
 }
 
 void WSControl(int Min_Option_Num, int Max_Option_Num, char* Users_Input, int* Stage_Number)

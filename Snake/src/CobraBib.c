@@ -2,27 +2,30 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <conio.h>
+#include "../include/PlayerBib.h"
 #include "../include/CobraBib.h"
 #include "../include/NivelBib.h"
-#include "../include/PlayerBib.h"
 #include "../include/MenuBib.h"
 #include <stdlib.h>
+#include<time.h>
+#include<windows.h>
+
 extern char nivel[500];
 extern int nivelId;
 extern int colunas;
 
-void LeComando(char *comando) //Lê o comando e o padroniza
+char FormatComando(char comando) //Lê o comando e o padroniza
 {
-	*comando = getch();
-	*comando = toupper(*comando);
+	comando = toupper(comando);
+
+	return comando;
 }
 
-int Movimentacao(Cobra *head, char *comando) //Move de acordo com o comando.
+int Movimentacao(Cobra *head, char comando) //Move de acordo com o comando.
 {
 	int quit = 0;
 
-	LeComando(comando);
-	switch (*comando) {
+	switch (comando) {
 		case 'W':
 			DeletaCobra(head);
 			CriaNovaCobra(head);
@@ -52,11 +55,36 @@ int Movimentacao(Cobra *head, char *comando) //Move de acordo com o comando.
 		case 'Q':
 			quit = 1;
 			break;
-		case 'M':
+		case 'J':
 			quit = 2;
 			break;
 	}
 	return quit;
+}
+
+int RepeteComando(Cobra *head, char *initcomando, Player AAA)
+{
+		int quit = 0, ratos, vidas;
+		
+		ratos = 2;
+		vidas = 1;
+				
+		if(*initcomando != 'I')
+		{
+			while(!kbhit())
+			{
+				Sleep(500);
+				quit = Movimentacao(head, *initcomando);
+				system("cls");
+				GUI(AAA, vidas, ratos);
+				quit = ImprimeMapa(head, *initcomando);
+			}
+			*initcomando = FormatComando(getch());
+		}
+		else
+			*initcomando = FormatComando(getch());
+		
+		return quit;
 }
 
 void CriaNovaCobra(Cobra *head) //Cria um novo pedaço de snake e o coloca na mesma posição da cabeça.

@@ -7,8 +7,13 @@ typedef struct str_Cobra
 	int hasFood;
 	struct str_Cobra *next;
 } Cobra;
-void LeComando(char *comando);
-int Movimentacao(Cobra *head, char *comando);
+typedef struct Rato
+{
+		struct Rato *next;
+} Mouse;
+char LeComando();
+int Movimentacao(Cobra *head, char comando);
+int RepeteComando(Cobra *head, char *initComando, Player AAA);
 void DeletaCobra(Cobra *head);
 void CriaNovaCobra(Cobra *head);
 void AumentaCobra(Cobra *head);
