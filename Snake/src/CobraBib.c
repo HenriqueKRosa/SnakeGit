@@ -26,21 +26,25 @@ int Movimentacao(Cobra *head, char *comando) //Move de acordo com o comando.
 		case 'W':
 			DeletaCobra(head);
 			CriaNovaCobra(head);
+			//PassFood(head);
 			head->pos = head->pos - colunas;
 			break;
 		case 'S':
 			DeletaCobra(head);
 			CriaNovaCobra(head);
+			//PassFood(head);
 			head->pos = head->pos + colunas;
 			break;
 		case 'A':
 			DeletaCobra(head);
 			CriaNovaCobra(head);
+			//PassFood(head);
 			head->pos = head->pos - 1;
 			break;
 		case 'D':
 			DeletaCobra(head);
 			CriaNovaCobra(head);
+			//PassFood(head);
 			head->pos = head->pos + 1;
 			break;
 		case '+':
@@ -65,6 +69,7 @@ void CriaNovaCobra(Cobra *head) //Cria um novo pedaço de snake e o coloca na me
 
 	nova = malloc(sizeof(Cobra));
 	nova->pos = head->pos;
+	nova->hasFood = 0;
 	nova->next = head->next;
 	head->next = nova;
 }
@@ -75,8 +80,10 @@ void AumentaCobra(Cobra *head) //Quase o mesmo que a função acima, porém a po
 	
 	nova = malloc(sizeof(Cobra));
 	nova->pos = 0;
+	nova->hasFood = 0;
 	nova->next = head->next;
 	head->next = nova;
+	nova->next->hasFood = 1;
 }
 
 void DeletaCobra(Cobra *head) //Deleta o último elemento da lista de Cobra
@@ -91,4 +98,20 @@ void DeletaCobra(Cobra *head) //Deleta o último elemento da lista de Cobra
 	}
 	free(tmp->next);
 	tmp->next = NULL;
+}
+
+int GetCobraSize(Cobra *head) //Calcula o tamanho da lista de Cobra
+{
+		Cobra *tmp;
+		int size = 0;
+	
+		tmp = head;
+		
+		while(tmp != NULL)
+		{
+			size++;
+			tmp = tmp->next;
+		}
+		
+		return size;
 }

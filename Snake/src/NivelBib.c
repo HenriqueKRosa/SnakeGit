@@ -124,7 +124,10 @@ int ImprimeMapa(Cobra *head, char comando) //Imprime o mapa e retorna se o jogad
 					}
 					else if(isSnake != 1) //Caso contrário imprime o corpo (tem que melhorar e botar no modelo da especificação)
 					{
-						printf("*");
+						if(condutor->hasFood == 1)
+							putch('O');
+						else
+							putch('-');
 						isSnake = 1;
 					}
 				}
@@ -138,6 +141,10 @@ int ImprimeMapa(Cobra *head, char comando) //Imprime o mapa e retorna se o jogad
 			if((index == head->pos) && (nivel[index] == '#')) //Verifica se houve colisão com a parede.
 			{
 				isGameOver = 1;
+			}
+			if((index == head->pos) && (nivel[index] == '*')) //Verifica se houve colisão com uma pedra.
+			{
+				DeletaCobra(head);
 			}
 			if(isSnake == 0) //Caso não seja Snake, imprime o caracter do mapa.
 			{

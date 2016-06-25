@@ -4,7 +4,7 @@
 typedef struct str_Cobra
 {
 	int pos;
-	//int hasFood;
+	int hasFood;
 	struct str_Cobra *next;
 } Cobra;
 void LeComando(char *comando);
@@ -12,4 +12,5 @@ int Movimentacao(Cobra *head, char *comando);
 void DeletaCobra(Cobra *head);
 void CriaNovaCobra(Cobra *head);
 void AumentaCobra(Cobra *head);
+int GetCobraSize(Cobra *head);
 #endif
