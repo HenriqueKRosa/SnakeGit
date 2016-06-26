@@ -1,8 +1,8 @@
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
-#include "../include/CobraBib.h"
 #include "../include/PlayerBib.h"
+#include "../include/CobraBib.h"
 #include "../include/MenuBib.h"
 #include "../include/NivelBib.h"
 #include <stdlib.h>

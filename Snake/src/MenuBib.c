@@ -87,7 +87,7 @@ return Option_Number;
 int Jogo() //Função que cria a "sessão de jogo" e une as outras funções para fazer o jogo funcionar.
 {
 	int /*isGameOver = 0,*/ quit = 0, init, win = 0, tam, ratos, vidas;
-	char comando = 'I';
+	char comando = 'D', lastcomand = 'D';
 	Cobra *head, *cobra1, *cobra2;
 	Player AAA;
 	
@@ -116,7 +116,7 @@ int Jogo() //Função que cria a "sessão de jogo" e une as outras funções par
 	nivel[init] = ' ';
 	do
 	{
-		quit = RepeteComando(head, &comando, AAA);
+		quit = RepeteComando(head, &comando, &lastcomand, AAA);
 		if(quit == 2)
 			win = 1;
 		/*system("cls");

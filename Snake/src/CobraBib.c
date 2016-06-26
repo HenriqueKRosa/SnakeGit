@@ -4,8 +4,8 @@
 #include <conio.h>
 #include "../include/PlayerBib.h"
 #include "../include/CobraBib.h"
-#include "../include/NivelBib.h"
 #include "../include/MenuBib.h"
+#include "../include/NivelBib.h"
 #include <stdlib.h>
 #include<time.h>
 #include<windows.h>
@@ -46,43 +46,63 @@ int Movimentacao(Cobra *head, char comando) //Move de acordo com o comando.
 			CriaNovaCobra(head);
 			head->pos = head->pos + 1;
 			break;
-		case '+':
+		/*case '+':
 			AumentaCobra(head);
 			break;
 		case '-':
 			DeletaCobra(head);
-			break;
+			break;*/
 		case 'Q':
 			quit = 1;
 			break;
-		case 'J':
+		/*case 'J':
 			quit = 2;
-			break;
+			break;*/
+		/*case 'P':
+			quit = Pause();
+			break;*/
 	}
+	Sleep(500);
 	return quit;
 }
 
-int RepeteComando(Cobra *head, char *initcomando, Player AAA)
+int RepeteComando(Cobra *head, char *initcomando, char *lastcomand, Player AAA)
 {
-		int quit = 0, ratos, vidas;
+		int quit = 0, ratos, vidas, isValidKey;
 		
 		ratos = 2;
 		vidas = 1;
-				
-		if(*initcomando != 'I')
+		
+		isValidKey = ((*initcomando == 'A') || (*initcomando == 'W') || (*initcomando == 'D') || (*initcomando == 'S')
+		|| (*initcomando == 'P') || (*initcomando == 'Q'));
+		
+		if(/*(*initcomando != 'I') && (*initcomando != '+') && (*initcomando != '-') && (*initcomando != 'J')*/ isValidKey)
 		{
 			while(!kbhit())
 			{
-				Sleep(500);
 				quit = Movimentacao(head, *initcomando);
 				system("cls");
 				GUI(AAA, vidas, ratos);
 				quit = ImprimeMapa(head, *initcomando);
 			}
+			*lastcomand = *initcomando;
 			*initcomando = FormatComando(getch());
 		}
+		else if(*initcomando == 'J')
+		{
+			quit = 2;
+		}
 		else
+		{
+			while(!kbhit())
+			{
+				quit = Movimentacao(head, *lastcomand);
+				system("cls");
+				GUI(AAA, vidas, ratos);
+				quit = ImprimeMapa(head, *lastcomand);
+			}
 			*initcomando = FormatComando(getch());
+		}
 		
 		return quit;
 }

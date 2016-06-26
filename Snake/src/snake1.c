@@ -2,15 +2,15 @@
 #include <stdio.h>
 #include <string.h>
 #include <conio.h>
+#include "../include/PlayerBib.h"
 #include "../include/CobraBib.h"
 #include "../include/NivelBib.h"
-#include "../include/PlayerBib.h"
 #include "../include/MenuBib.h"
 int nivelId = 1;
 char nivel[500];
 int colunas = 0;
 
-int main2()
+/*int main2()
 {
 	int isGameOver = 0, quit = 0;
 	char comando = 'I';
@@ -39,7 +39,7 @@ int main2()
 	puts("Game over");
 	getch();
 	return 0;
-}
+}*/
 
 int main() //Jogo temporário
 {
