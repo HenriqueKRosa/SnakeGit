@@ -114,6 +114,7 @@ int Jogo() //Função que cria a "sessão de jogo" e une as outras funções par
 	nivel[init] = ' ';
 	do
 	{
+		CriaRato(head);
 		quit = RepeteComando(head, &comando, &lastcomand, AAA);
 		if(quit == 2)
 			win = 1;

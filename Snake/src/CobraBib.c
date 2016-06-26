@@ -9,18 +9,10 @@
 #include <stdlib.h>
 #include<time.h>
 #include<windows.h>
-
 extern char nivel[500];
 extern int nivelId;
 extern int colunas;
-/*
-char FormatComando(char comando) //Lê o comando e o padroniza
-{
-	comando = toupper(comando);
 
-	return comando;
-}
-*/
 void Movimentacao(Cobra *head, char comando) //Move de acordo com o comando.
 {
 	switch (comando) {

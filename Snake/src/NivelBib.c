@@ -6,6 +6,7 @@
 #include "../include/MenuBib.h"
 #include "../include/NivelBib.h"
 #include <stdlib.h>
+#include<time.h>
 extern char nivel[500];
 extern int nivelId;
 extern int colunas;
@@ -146,6 +147,11 @@ int ImprimeMapa(Cobra *head, char comando) //Imprime o mapa e retorna se o jogad
 			{
 				DeletaCobra(head);
 			}
+			if((index == head->pos) && (nivel[index] == '&'))
+			{
+					AumentaCobra(head);
+					nivel[index] = ' ';
+			}
 			if(isSnake == 0) //Caso não seja Snake, imprime o caracter do mapa.
 			{
 				printf("%c", nivel[index]);
@@ -195,6 +201,7 @@ void Print_Map(char Map_Name[20])
 	}
 	fclose(Map_File);
 }
+
 void PosicoesLivres(Cobra* condutor, int* PosLivres, int* PosOcupadas, int NPosOcupadas)                 //Preenche array com as posições livres no mapa.
 {
     int PosDaCobra[500], cont = 0, k = 0, j = 0, TamanhoCobra;
@@ -215,6 +222,7 @@ void PosicoesLivres(Cobra* condutor, int* PosLivres, int* PosOcupadas, int NPosO
         k++;
     }
 }
+
 int IsKPosDoArray(int k, int* ArrayDePosicoes, int TamanhoArray)         //Verifica se um número K é alguma posição da cobra.
 {
     int i, boolean = 0;
@@ -226,4 +234,46 @@ int IsKPosDoArray(int k, int* ArrayDePosicoes, int TamanhoArray)         //Verif
         }
     }
     return boolean;
+}
+
+int GetMapEnd()
+{
+	int index = 0;
+	
+	while(nivel[index] != '\0')
+	{
+			index++;
+	}
+
+	return index;
+}
+
+int GeraRandPos(Cobra *head)
+{
+		int r;
+		int mapMax, isPosOfSnake = 0;
+		Cobra *tmp;
+		
+		tmp = head;
+		mapMax = GetMapEnd();
+		srand(time(NULL));
+		
+		do
+		{
+				r = rand() % mapMax;
+				while(tmp != NULL)
+				{
+					if(r == tmp->pos)
+						isPosOfSnake = 1;
+					tmp = tmp->next;
+				}
+		}while( (nivel[r] != '#') && (nivel[r] != '*') && (isPosOfSnake == 1) );
+	return r;
+}
+
+void CriaRato(Cobra *head)
+{
+		int pos = GeraRandPos(head);
+		
+		nivel[pos] = '&';
 }
