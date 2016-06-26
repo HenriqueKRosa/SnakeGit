@@ -190,3 +190,57 @@ void Imprime_Jogadores()
         printf("%s\n", jogador.nome);
     }
 }
+void Controla_Menu()
+{
+		int op, op1, win;
+        do
+        {
+		Print_Title();
+		op = Menu();
+		do
+        {
+		switch(op)
+		{
+				case 1:
+					system("cls");
+					win = Jogo();
+					if(win == 1)
+					{
+						nivelId++;
+					}
+					if(win != 0)
+                    			{
+                        		puts("Press any key to return to main menu.");
+                        		getch();
+                        		op = 0;
+                    			}
+					break;
+				case 2:
+					op1 = Stage_selection();
+					switch(op1)
+					{
+						case 0:
+							nivelId = 0;
+							op = 1;
+							break;
+						case 1:
+							nivelId = 1;
+							op = 1;
+							break;
+						case 2:
+							nivelId = 2;
+							op = 1;
+							break;
+						case 3:
+							op = 0;
+							break;
+					}
+					break;
+				case 3:
+					system("cls");
+					Show_Scoreboard();
+					break;
+		}
+        	}while(op == 1);
+	}while(op != 4);
+}
