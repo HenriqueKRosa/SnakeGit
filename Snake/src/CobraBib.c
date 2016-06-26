@@ -72,11 +72,8 @@ int Pause(char *initcomando, char *lastcomand)
 
 int RepeteComando(Cobra *head, char *initcomando, char *lastcomand, Player *AAA)
 {
-		int quit = 0, ratos, vidas, isValidKey, tam;
+		int quit = 0, ratos = 0, vidas, isValidKey, tam;
 		clock_t start, end;
-		
-		ratos = 2;
-		vidas = 1;
 		
 		isValidKey = ((*initcomando == 'A') || (*initcomando == 'W') || (*initcomando == 'D') || (*initcomando == 'S'));
 		tam = GetCobraSize(head);
@@ -88,7 +85,7 @@ int RepeteComando(Cobra *head, char *initcomando, char *lastcomand, Player *AAA)
 			{
 				Movimentacao(head, *initcomando);
 				system("cls");
-				GUI(*AAA, vidas, ratos);
+				GUI(*AAA, ratos);
 				quit = ImprimeMapa(head, *initcomando, AAA);
 				tam = GetCobraSize(head);
 				end = clock();
@@ -119,7 +116,7 @@ int RepeteComando(Cobra *head, char *initcomando, char *lastcomand, Player *AAA)
 			{
 				Movimentacao(head, *lastcomand);
 				system("cls");
-				GUI(*AAA, vidas, ratos);
+				GUI(*AAA, ratos);
 				quit = ImprimeMapa(head, *lastcomand, AAA);
 				tam = GetCobraSize(head);
 				end = clock();
@@ -131,7 +128,7 @@ int RepeteComando(Cobra *head, char *initcomando, char *lastcomand, Player *AAA)
 				*initcomando = toupper(getch());
 			}
 		}
-		if(((end - start) / CLOCKS_PER_SEC) > 0.1)
+		if(((end - start) / CLOCKS_PER_SEC) > 1)
 			CriaRato(head);
 		
 		return quit;

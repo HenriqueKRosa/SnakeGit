@@ -85,12 +85,11 @@ int Menu() //Função que cuida dos botões do menu e retorna a opção escolhid
 return Option_Number;
 }
 
-int Jogo() //Função que cria a "sessão de jogo" e une as outras funções para fazer o jogo funcionar.
+int Jogo(Player *AAA) //Função que cria a "sessão de jogo" e une as outras funções para fazer o jogo funcionar.
 {
-	int /*isGameOver = 0,*/ quit = 0, init, win = 0, tam, ratos, vidas = 2;
+	int quit = 0, init, win = 0, ratos = 0;
 	char comando = 'D', lastcomand = 'D';
 	Cobra *head, *cobra1, *cobra2;
-	Player AAA;
 	
 	head = malloc(sizeof(Cobra));
 	cobra1 = malloc(sizeof(Cobra));
@@ -108,27 +107,25 @@ int Jogo() //Função que cria a "sessão de jogo" e une as outras funções par
 	cobra2->hasFood = 0;
 	cobra2->next = NULL;
 	
-	AAA.pontos = 0;
-	
-	GUI(AAA, vidas, ratos);
-	ImprimeMapa(head, comando, &AAA);
+	GUI(*AAA, ratos);
+	ImprimeMapa(head, comando, AAA);
 	nivel[init] = ' ';
 	do
 	{
-		quit = RepeteComando(head, &comando, &lastcomand, &AAA);
+		quit = RepeteComando(head, &comando, &lastcomand, AAA);
 		if(quit == 2)
 			win = 1;
 	}while((quit == 0) && (win != 1));
 
 	memset(nivel, 0, sizeof(nivel));
 	puts("Game over");
-	GetPlayerName(&AAA);
+	GetPlayerName(AAA);
 	return win;
 }
 
-void GUI(Player AAA, int vidas, int ratos) //Exibe na tela in-game com os dados do jogador.
+void GUI(Player AAA, int ratos) //Exibe na tela in-game com os dados do jogador.
 {
-	printf("Nivel: %d Ratos: %d/15 Vidas: %d\n", nivelId, AAA.pontos, ratos, vidas);
+	printf("Nivel: %d Ratos: %d/15 Vidas: %d\n", nivelId, AAA.pontos, ratos, AAA.vidas);
 }
 
 void WSControl(int Min_Option_Num, int Max_Option_Num, char* Users_Input, int* Stage_Number)
@@ -189,4 +186,60 @@ void Imprime_Jogadores()
         fread(&jogador, sizeof(jogador), 1, jogadores);
         printf("%s\n", jogador.nome);
     }
+}
+
+void MenuControl()
+{
+	int op, op1, win;
+	Player *AAA;
+	
+	Inicio:
+	Print_Title();
+	op = Menu();
+	
+	Opcao:
+	switch(op)
+	{
+		case 1:
+			system("cls");
+			win = Jogo(AAA);
+			if(win == 1)
+			{
+				nivelId++;
+				goto Opcao;
+			}
+			puts("Press any key to return to main menu.");
+			getch();
+			goto Inicio;
+			break;
+		case 2:
+			op1 = Stage_selection();
+			switch(op1)
+			{
+				case 0:
+					nivelId = 0;
+					op = 1;
+					goto Opcao;
+					break;
+				case 1:
+					nivelId = 1;
+					op = 1;
+					goto Opcao;
+					break;
+				case 2:
+					nivelId = 2;
+					op = 1;
+					goto Opcao;
+					break;
+				case 3:
+					goto Inicio;
+					break;
+			}
+			break;
+		case 3:
+			puts("Nao implementado ainda!");
+			getch();
+			goto Inicio;
+			break;
+	}
 }
