@@ -99,7 +99,7 @@ int CarregaNivel() //Carrega um nível a partir do valor da var global nivelId.
 	return init;
 }
 
-int ImprimeMapa(Cobra *head, char comando) //Imprime o mapa e retorna se o jogador tomou game over
+int ImprimeMapa(Cobra *head, char comando, Player *AAA) //Imprime o mapa e retorna se o jogador tomou game over
 {
 	int index = 0, isSnake = 0, isGameOver = 0, i;
 	int isPosOfSnake, isNotWall;
@@ -147,10 +147,11 @@ int ImprimeMapa(Cobra *head, char comando) //Imprime o mapa e retorna se o jogad
 			{
 				DeletaCobra(head);
 			}
-			if((index == head->pos) && (nivel[index] == '&'))
+			if((index == head->pos) && (nivel[index] == '&')) //Comeu rato?
 			{
 					AumentaCobra(head);
 					nivel[index] = ' ';
+					AddScore(AAA);
 			}
 			if(isSnake == 0) //Caso não seja Snake, imprime o caracter do mapa.
 			{

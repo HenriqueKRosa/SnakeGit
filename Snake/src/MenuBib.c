@@ -107,20 +107,17 @@ int Jogo() //Função que cria a "sessão de jogo" e une as outras funções par
 	cobra2->pos = 0;
 	cobra2->hasFood = 0;
 	cobra2->next = NULL;
-
-	AAA.pontos = 15;
+	
+	AAA.pontos = 0;
 	
 	GUI(AAA, vidas, ratos);
-	ImprimeMapa(head, comando);
+	ImprimeMapa(head, comando, &AAA);
 	nivel[init] = ' ';
-	//clock_t startClock = clock();
 	do
 	{
-		quit = RepeteComando(head, &comando, &lastcomand, AAA);
+		quit = RepeteComando(head, &comando, &lastcomand, &AAA);
 		if(quit == 2)
 			win = 1;
-		//clock_t endClock = clock();
-		//if(((endClock - startClock) / CLOCKS_PER_SEC) >= 100)
 	}while((quit == 0) && (win != 1));
 
 	memset(nivel, 0, sizeof(nivel));

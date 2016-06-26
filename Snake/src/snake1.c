@@ -10,37 +10,6 @@ int nivelId = 1;
 char nivel[500];
 int colunas = 0;
 
-/*int main2()
-{
-	int isGameOver = 0, quit = 0;
-	char comando = 'I';
-	Cobra *head, *cobra1, *cobra2;
-	
-	head = malloc(sizeof(Cobra));
-	cobra1 = malloc(sizeof(Cobra));
-	cobra2 = malloc(sizeof(Cobra));
-	
-	head->pos = 55;
-	head->next = cobra1;
-	cobra1->pos = 0;
-	cobra1->next = cobra2;
-	cobra2->pos = 0;
-	cobra2->next = NULL;
-	
-	CarregaNivel();
-	ImprimeMapa(head, comando);
-	
-	do
-	{
-		quit = Movimentacao(head, &comando);
-		system("cls");
-		isGameOver = ImprimeMapa(head, comando);
-	}while((isGameOver != 1) && (quit != 1));
-	puts("Game over");
-	getch();
-	return 0;
-}*/
-
 int main() //Jogo temporário
 {
 		int op, op1, win;

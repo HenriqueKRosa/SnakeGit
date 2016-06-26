@@ -70,7 +70,7 @@ int Pause(char *initcomando, char *lastcomand)
 		return quit;
 }
 
-int RepeteComando(Cobra *head, char *initcomando, char *lastcomand, Player AAA)
+int RepeteComando(Cobra *head, char *initcomando, char *lastcomand, Player *AAA)
 {
 		int quit = 0, ratos, vidas, isValidKey, tam;
 		clock_t start, end;
@@ -84,16 +84,16 @@ int RepeteComando(Cobra *head, char *initcomando, char *lastcomand, Player AAA)
 		start = clock();
 		if(isValidKey)
 		{
-			while((!kbhit()) && ((quit == 0) && (tam >= 3)))
+			while((!kbhit()) && (quit == 0) && (tam >= 1))
 			{
 				Movimentacao(head, *initcomando);
 				system("cls");
-				GUI(AAA, vidas, ratos);
-				quit = ImprimeMapa(head, *initcomando);
+				GUI(*AAA, vidas, ratos);
+				quit = ImprimeMapa(head, *initcomando, AAA);
 				tam = GetCobraSize(head);
 				end = clock();
 			}
-			if(tam < 3)
+			if(tam < 1)
 				quit = 1;
 			if(quit == 0)
 			{	
@@ -105,9 +105,9 @@ int RepeteComando(Cobra *head, char *initcomando, char *lastcomand, Player AAA)
 		{
 			quit = 2;
 		}
-		else if((*initcomando == 'Q'))
+		else if(*initcomando == 'Q')
 		{
-				quit = 1;
+				quit = 3;
 		}
 		else if(*initcomando == 'P')
 		{
@@ -119,12 +119,12 @@ int RepeteComando(Cobra *head, char *initcomando, char *lastcomand, Player AAA)
 			{
 				Movimentacao(head, *lastcomand);
 				system("cls");
-				GUI(AAA, vidas, ratos);
-				quit = ImprimeMapa(head, *lastcomand);
+				GUI(*AAA, vidas, ratos);
+				quit = ImprimeMapa(head, *lastcomand, AAA);
 				tam = GetCobraSize(head);
 				end = clock();
 			}
-			if(tam < 3)
+			if(tam < 1)
 				quit = 1;
 			if(quit == 0)
 			{	

@@ -8,7 +8,7 @@ typedef struct str_Cobra
 	struct str_Cobra *next;
 } Cobra;
 void Movimentacao(Cobra *head, char comando);
-int RepeteComando(Cobra *head, char *initComando, char *lastcomand, Player AAA);
+int RepeteComando(Cobra *head, char *initComando, char *lastcomand, Player *AAA);
 void DeletaCobra(Cobra *head);
 void CriaNovaCobra(Cobra *head);
 void AumentaCobra(Cobra *head);
