@@ -267,7 +267,7 @@ int GeraRandPos(Cobra *head)
 						isPosOfSnake = 1;
 					tmp = tmp->next;
 				}
-		}while( (nivel[r] != '#') && (nivel[r] != '*') && (isPosOfSnake == 1) );
+		}while( (nivel[r] == '#') || (nivel[r] == '*') || (isPosOfSnake == 1) );
 	return r;
 }
 

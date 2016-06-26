@@ -73,6 +73,7 @@ int Pause(char *initcomando, char *lastcomand)
 int RepeteComando(Cobra *head, char *initcomando, char *lastcomand, Player AAA)
 {
 		int quit = 0, ratos, vidas, isValidKey, tam;
+		clock_t start, end;
 		
 		ratos = 2;
 		vidas = 1;
@@ -80,6 +81,7 @@ int RepeteComando(Cobra *head, char *initcomando, char *lastcomand, Player AAA)
 		isValidKey = ((*initcomando == 'A') || (*initcomando == 'W') || (*initcomando == 'D') || (*initcomando == 'S'));
 		tam = GetCobraSize(head);
 		
+		start = clock();
 		if(isValidKey)
 		{
 			while((!kbhit()) && ((quit == 0) && (tam >= 3)))
@@ -89,6 +91,7 @@ int RepeteComando(Cobra *head, char *initcomando, char *lastcomand, Player AAA)
 				GUI(AAA, vidas, ratos);
 				quit = ImprimeMapa(head, *initcomando);
 				tam = GetCobraSize(head);
+				end = clock();
 			}
 			if(tam < 3)
 				quit = 1;
@@ -112,13 +115,14 @@ int RepeteComando(Cobra *head, char *initcomando, char *lastcomand, Player AAA)
 		}
 		else
 		{
-			while((!kbhit()) && ((quit == 0) && (tam >= 3)))
+			while((!kbhit()) && ((quit == 0) && (tam >= 1)))
 			{
 				Movimentacao(head, *lastcomand);
 				system("cls");
 				GUI(AAA, vidas, ratos);
 				quit = ImprimeMapa(head, *lastcomand);
-				tam = GetCobraSize(head);			
+				tam = GetCobraSize(head);
+				end = clock();
 			}
 			if(tam < 3)
 				quit = 1;
@@ -127,6 +131,8 @@ int RepeteComando(Cobra *head, char *initcomando, char *lastcomand, Player AAA)
 				*initcomando = toupper(getch());
 			}
 		}
+		if(((end - start) / CLOCKS_PER_SEC) > 0.1)
+			CriaRato(head);
 		
 		return quit;
 }

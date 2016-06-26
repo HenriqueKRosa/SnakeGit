@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <time.h>
 #include "../include/PlayerBib.h"
 #include "../include/CobraBib.h"
 #include "../include/NivelBib.h"
@@ -112,12 +113,14 @@ int Jogo() //Função que cria a "sessão de jogo" e une as outras funções par
 	GUI(AAA, vidas, ratos);
 	ImprimeMapa(head, comando);
 	nivel[init] = ' ';
+	//clock_t startClock = clock();
 	do
 	{
-		CriaRato(head);
 		quit = RepeteComando(head, &comando, &lastcomand, AAA);
 		if(quit == 2)
 			win = 1;
+		//clock_t endClock = clock();
+		//if(((endClock - startClock) / CLOCKS_PER_SEC) >= 100)
 	}while((quit == 0) && (win != 1));
 
 	memset(nivel, 0, sizeof(nivel));
