@@ -202,8 +202,8 @@ void PosicoesLivres(Cobra* condutor, int* PosLivres, int* PosOcupadas, int NPosO
     {
         PosDaCobra[cont] = condutor->pos;
         condutor = condutor->next; //Vai pro próximo elemento da lista
-        ++;
-}
+        //++;
+	}
     TamanhoCobra = cont;
     while(nivel[k] != '\0')
     {
@@ -215,12 +215,12 @@ void PosicoesLivres(Cobra* condutor, int* PosLivres, int* PosOcupadas, int NPosO
         k++;
     }
 }
-int IsKPosDoArray(int k, int* ArrayDePosições, int TamanhoArray)         //Verifica se um número K é alguma posição da cobra.
+int IsKPosDoArray(int k, int* ArrayDePosicoes, int TamanhoArray)         //Verifica se um número K é alguma posição da cobra.
 {
     int i, boolean = 0;
     for(i = 0; i < TamanhoArray; i++)
     {
-        if(k == ArrayDePosições[i])
+        if(k == ArrayDePosicoes[i])
         {
             boolean = 1;
         }

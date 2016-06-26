@@ -13,18 +13,16 @@
 extern char nivel[500];
 extern int nivelId;
 extern int colunas;
-
+/*
 char FormatComando(char comando) //Lê o comando e o padroniza
 {
 	comando = toupper(comando);
 
 	return comando;
 }
-
-int Movimentacao(Cobra *head, char comando) //Move de acordo com o comando.
+*/
+void Movimentacao(Cobra *head, char comando) //Move de acordo com o comando.
 {
-	int quit = 0;
-
 	switch (comando) {
 		case 'W':
 			DeletaCobra(head);
@@ -52,18 +50,32 @@ int Movimentacao(Cobra *head, char comando) //Move de acordo com o comando.
 		case '-':
 			DeletaCobra(head);
 			break;*/
-		case 'Q':
-			quit = 1;
-			break;
-		/*case 'J':
-			quit = 2;
-			break;*/
-		/*case 'P':
-			quit = Pause();
-			break;*/
 	}
 	Sleep(500);
-	return quit;
+}
+
+int Pause(char *initcomando, char *lastcomand)
+{
+		char tecla = 'a';
+		int quit;
+		
+		system("cls");
+		printf("%20s\nPress P to unpause.", "GAME PAUSED");
+
+		do
+		{
+				tecla = getch();
+				tecla = toupper(tecla);
+		}while((tecla != 'P') && (tecla != 'Q'));
+
+		if(tecla == 'Q')
+			quit = 1;
+		else
+			quit = 0;
+		
+		*initcomando = *lastcomand;
+		
+		return quit;
 }
 
 int RepeteComando(Cobra *head, char *initcomando, char *lastcomand, Player AAA)
@@ -73,35 +85,42 @@ int RepeteComando(Cobra *head, char *initcomando, char *lastcomand, Player AAA)
 		ratos = 2;
 		vidas = 1;
 		
-		isValidKey = ((*initcomando == 'A') || (*initcomando == 'W') || (*initcomando == 'D') || (*initcomando == 'S')
-		|| (*initcomando == 'P') || (*initcomando == 'Q'));
+		isValidKey = ((*initcomando == 'A') || (*initcomando == 'W') || (*initcomando == 'D') || (*initcomando == 'S'));
 		
-		if(/*(*initcomando != 'I') && (*initcomando != '+') && (*initcomando != '-') && (*initcomando != 'J')*/ isValidKey)
+		if(isValidKey)
 		{
 			while(!kbhit())
 			{
-				quit = Movimentacao(head, *initcomando);
+				Movimentacao(head, *initcomando);
 				system("cls");
 				GUI(AAA, vidas, ratos);
 				quit = ImprimeMapa(head, *initcomando);
 			}
 			*lastcomand = *initcomando;
-			*initcomando = FormatComando(getch());
+			*initcomando = toupper(getch());
 		}
 		else if(*initcomando == 'J')
 		{
 			quit = 2;
 		}
+		else if((*initcomando == 'Q'))
+		{
+				quit = 1;
+		}
+		else if(*initcomando == 'P')
+		{
+				quit = Pause(initcomando,lastcomand);
+		}
 		else
 		{
 			while(!kbhit())
 			{
-				quit = Movimentacao(head, *lastcomand);
+				Movimentacao(head, *lastcomand);
 				system("cls");
 				GUI(AAA, vidas, ratos);
 				quit = ImprimeMapa(head, *lastcomand);
 			}
-			*initcomando = FormatComando(getch());
+			*initcomando = toupper(getch());
 		}
 		
 		return quit;

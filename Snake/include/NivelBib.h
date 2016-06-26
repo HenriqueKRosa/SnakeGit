@@ -9,5 +9,5 @@ int CarregaNivel();
 void ImprimeCabeca(char comando);
 int ImprimeMapa(Cobra *head, char comando);
 void PosicoesLivres(Cobra* condutor, int* PosLivres, int* PosOcupadas, int NPosOcupadas);
-int IsKPosDoArray(int k, int* ArrayDePosições, int TamanhoArray);
+int IsKPosDoArray(int k, int* ArrayDePosicoes, int TamanhoArray);
 #endif
