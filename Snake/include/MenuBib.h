@@ -12,4 +12,5 @@ void Show_Scoreboard();
 int Stage_selection();
 void WSControl(int Min_Option_Num, int Max_Option_Num, char* Users_Input, int* Stage_Number);
 void MenuControl();
+void Controla_Menu();
 #endif
