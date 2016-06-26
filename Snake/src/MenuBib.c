@@ -86,7 +86,7 @@ return Option_Number;
 
 int Jogo() //Função que cria a "sessão de jogo" e une as outras funções para fazer o jogo funcionar.
 {
-	int /*isGameOver = 0,*/ quit = 0, init, win = 0, tam, ratos, vidas;
+	int /*isGameOver = 0,*/ quit = 0, init, win = 0, tam, ratos, vidas = 2;
 	char comando = 'D', lastcomand = 'D';
 	Cobra *head, *cobra1, *cobra2;
 	Player AAA;
@@ -108,8 +108,6 @@ int Jogo() //Função que cria a "sessão de jogo" e une as outras funções par
 	cobra2->next = NULL;
 
 	AAA.pontos = 15;
-	/*ratos = 2;
-	vidas = 1;*/
 	
 	GUI(AAA, vidas, ratos);
 	ImprimeMapa(head, comando);
@@ -119,11 +117,7 @@ int Jogo() //Função que cria a "sessão de jogo" e une as outras funções par
 		quit = RepeteComando(head, &comando, &lastcomand, AAA);
 		if(quit == 2)
 			win = 1;
-		/*system("cls");
-		GUI(AAA, vidas, ratos);
-		isGameOver = ImprimeMapa(head, comando);*/
-		tam = GetCobraSize(head);
-	}while(/*(isGameOver != 1) && */(quit == 0) && (win != 1) && (tam >= 3));
+	}while((quit == 0) && (win != 1));
 
 	memset(nivel, 0, sizeof(nivel));
 	puts("Game over");

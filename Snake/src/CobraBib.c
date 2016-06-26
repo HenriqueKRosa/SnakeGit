@@ -80,24 +80,31 @@ int Pause(char *initcomando, char *lastcomand)
 
 int RepeteComando(Cobra *head, char *initcomando, char *lastcomand, Player AAA)
 {
-		int quit = 0, ratos, vidas, isValidKey;
+		int quit = 0, ratos, vidas, isValidKey, tam;
 		
 		ratos = 2;
 		vidas = 1;
 		
 		isValidKey = ((*initcomando == 'A') || (*initcomando == 'W') || (*initcomando == 'D') || (*initcomando == 'S'));
+		tam = GetCobraSize(head);
 		
 		if(isValidKey)
 		{
-			while(!kbhit())
+			while((!kbhit()) && ((quit == 0) && (tam >= 3)))
 			{
 				Movimentacao(head, *initcomando);
 				system("cls");
 				GUI(AAA, vidas, ratos);
 				quit = ImprimeMapa(head, *initcomando);
+				tam = GetCobraSize(head);
 			}
-			*lastcomand = *initcomando;
-			*initcomando = toupper(getch());
+			if(tam < 3)
+				quit = 1;
+			if(quit == 0)
+			{	
+				*lastcomand = *initcomando;
+				*initcomando = toupper(getch());
+			}
 		}
 		else if(*initcomando == 'J')
 		{
@@ -113,14 +120,20 @@ int RepeteComando(Cobra *head, char *initcomando, char *lastcomand, Player AAA)
 		}
 		else
 		{
-			while(!kbhit())
+			while((!kbhit()) && ((quit == 0) && (tam >= 3)))
 			{
 				Movimentacao(head, *lastcomand);
 				system("cls");
 				GUI(AAA, vidas, ratos);
 				quit = ImprimeMapa(head, *lastcomand);
+				tam = GetCobraSize(head);			
 			}
-			*initcomando = toupper(getch());
+			if(tam < 3)
+				quit = 1;
+			if(quit == 0)
+			{	
+				*initcomando = toupper(getch());
+			}
 		}
 		
 		return quit;
